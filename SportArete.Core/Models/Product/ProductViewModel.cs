@@ -1,6 +1,6 @@
 ﻿using SportArete.Infrastructure.Data.Models;
 
-namespace SportArete.Models
+namespace SportArete.Core.Models.Product
 {
     public class ProductViewModel
     {

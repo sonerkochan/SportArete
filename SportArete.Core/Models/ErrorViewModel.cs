@@ -1,4 +1,4 @@
-namespace SportArete.Models
+namespace SportArete.Core.Models
 {
     public class ErrorViewModel
     {

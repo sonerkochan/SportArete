@@ -2,27 +2,27 @@
 using System.ComponentModel.DataAnnotations;
 using static SportArete.Infrastructure.Data.Constants.GlobalConstants;
 
-namespace SportArete.Models
+namespace SportArete.Core.Models.Product
 {
     public class AddProductViewModel
     {
         [Required]
         [StringLength(ProductModelMaxLength, MinimumLength = ProductModelMinLength)]
-        public string Model { get; set; }
+        public string Model { get; set; } = null!;
 
         [Required]
         [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength)]
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
         [Required]
-        public string Size { get; set; }
+        public string Size { get; set; } = null!;
 
         [Required]
         //[Range(typeof(decimal), MinPrice, MaxPrice, ConvertValueInInvariantCulture = true)]
         public decimal Price { get; set; }
 
         [Required]
-        public string ImageData { get; set; } //change to byte[]
+        public string ImageData { get; set; } = null!; //change to byte[]
 
         public int CategoryId { get; set; }
 

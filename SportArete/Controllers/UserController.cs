@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SportArete.Infrastructure.Data.Models;
-using SportArete.Models;
+using SportArete.Core.Models.User;
 
 namespace SportArete.Controllers
 {

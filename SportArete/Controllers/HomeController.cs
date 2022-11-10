@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SportArete.Models;
+using SportArete.Core.Models;
 using System.Diagnostics;
 
 namespace SportArete.Controllers

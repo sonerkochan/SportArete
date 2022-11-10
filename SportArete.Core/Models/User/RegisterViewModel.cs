@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static SportArete.Infrastructure.Data.Constants.GlobalConstants;
 
-namespace SportArete.Models
+namespace SportArete.Core.Models.User
 {
     public class RegisterViewModel
     {
