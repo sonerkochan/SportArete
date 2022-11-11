@@ -10,5 +10,6 @@ namespace SportArete.Infrastructure.Data.Models
 
         public IEnumerable<Product> Products { get; set; } = new List<Product>();
 
+
     }
 }

@@ -5,6 +5,11 @@ namespace SportArete.Infrastructure.Data.Models
 {
     public class User : IdentityUser
     {
-        public List<Order> Orders { get; set; } = new List<Order>();
+
+        public int? CartId { get; set; }
+
+        [ForeignKey(nameof(CartId))]
+        public Cart? Cart { get; set; } = null!;
+
     }
 }

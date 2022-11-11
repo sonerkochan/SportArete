@@ -16,7 +16,7 @@ namespace SportArete.Core.Models.Product
 
         public string ImageData { get; set; } //change to byte[]
 
-        public string Category { get; set; }
+        public string CategoryId { get; set; }
 
         public string Brand { get; set; }
     }

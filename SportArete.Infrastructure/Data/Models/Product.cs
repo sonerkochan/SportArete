@@ -29,6 +29,9 @@ namespace SportArete.Infrastructure.Data.Models
         [Required]
         public string ImageData { get; set; } = null!;
 
+        [Required]
+        public int ViewsCount { get; set; } = 0;
+
         public int? CategoryId { get; set; }
 
         [ForeignKey(nameof(CategoryId))]

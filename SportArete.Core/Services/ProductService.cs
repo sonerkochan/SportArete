@@ -32,6 +32,22 @@ namespace SportArete.Core.Services
             await repo.AddAsync(entity);
             await repo.SaveChangesAsync();
         }
+        public async Task<IEnumerable<TopProductViewModel>> GetTopAsync()
+        {
+            return await repo.AllReadonly<Product>()
+                .OrderByDescending(h => h.ViewsCount)
+                .Select(h => new TopProductViewModel()
+                {
+                    Id = h.Id,
+                    Model = h.Model,
+                    Price = h.Price,
+                    ImageData = h.ImageData,
+                    Category = h.Category.Name,
+                    Brand = h.Brand.Name
+                })
+                .Take(3)
+                .ToListAsync();
+        }
 
         public async Task<IEnumerable<Brand>> GetBrandsAsync()
         {

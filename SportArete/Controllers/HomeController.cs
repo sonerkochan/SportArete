@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SportArete.Core.Contracts;
 using SportArete.Core.Models;
+using SportArete.Core.Services;
 using System.Diagnostics;
 
 namespace SportArete.Controllers
@@ -8,14 +10,22 @@ namespace SportArete.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProductService productService;
+
+        public HomeController(
+            ILogger<HomeController> logger,
+            IProductService _productService)
         {
             _logger = logger;
+            productService = _productService;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = await productService.GetTopAsync();
+
+            return View(model);
         }
 
         public IActionResult Privacy()
