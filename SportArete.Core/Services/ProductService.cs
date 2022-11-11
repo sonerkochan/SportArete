@@ -1,29 +1,46 @@
-﻿using SportArete.Core.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using SportArete.Core.Contracts;
 using SportArete.Core.Models.Product;
+using SportArete.Infrastructure.Data.Common;
 using SportArete.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SportArete.Core.Services
 {
     public class ProductService : IProductService
     {
-        public Task AddProductAsync(AddProductViewModel model)
+        private readonly IRepository repo;
+
+        public ProductService(IRepository _repo)
         {
-            throw new NotImplementedException();
+            repo = _repo;
         }
 
-        public Task<IEnumerable<Brand>> GetBrandsAsync()
+        public async Task AddProductAsync(AddProductViewModel model)
         {
-            throw new NotImplementedException();
+            var entity = new Product()
+            {
+                Model = model.Model,
+                Description = model.Description,
+                Size = model.Size,
+                Colour = model.Colour,
+                Price = model.Price,
+                CategoryId = model.CategoryId,
+                BrandId = model.BrandId,
+                ImageData = model.ImageData
+            };
+
+            await repo.AddAsync(entity);
+            await repo.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Category>> GetCategoriesAsync()
+        public async Task<IEnumerable<Brand>> GetBrandsAsync()
         {
-            throw new NotImplementedException();
+            return await repo.All<Brand>().ToListAsync();
+        }
+
+        public async Task<IEnumerable<Category>> GetCategoriesAsync()
+        {
+            return await repo.All<Category>().ToListAsync();
         }
     }
 }

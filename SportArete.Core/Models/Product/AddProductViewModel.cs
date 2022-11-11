@@ -18,11 +18,13 @@ namespace SportArete.Core.Models.Product
         public string Size { get; set; } = null!;
 
         [Required]
-        //[Range(typeof(decimal), MinPrice, MaxPrice, ConvertValueInInvariantCulture = true)]
+        public string Colour { get; set; } = null!;
+
+        [Required]
         public decimal Price { get; set; }
 
         [Required]
-        public string ImageData { get; set; } = null!; //change to byte[]
+        public string ImageData { get; set; } = null!; //change to byte[] later
 
         public int CategoryId { get; set; }
 
