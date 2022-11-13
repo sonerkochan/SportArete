@@ -3,6 +3,7 @@ using SportArete.Core.Data;
 using static SportArete.Infrastructure.Data.Constants.GlobalConstants;
 using SportArete.Infrastructure.Data.Models;
 using SportArete.ModelBinders;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

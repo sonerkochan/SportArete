@@ -1,6 +1,4 @@
-﻿using SportArete.Infrastructure.Data.Models;
-
-namespace SportArete.Core.Models.Product
+﻿namespace SportArete.Core.Models.Product
 {
     public class ProductViewModel
     {
@@ -8,15 +6,11 @@ namespace SportArete.Core.Models.Product
 
         public string Model { get; set; }
 
-        public string Description { get; set; }
-
-        public string Size { get; set; }
-
         public decimal Price { get; set; }
 
         public string ImageData { get; set; } //change to byte[]
 
-        public string CategoryId { get; set; }
+        public string Category { get; set; }
 
         public string Brand { get; set; }
     }

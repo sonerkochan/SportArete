@@ -1,20 +1,29 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using SportArete.Core.Contracts;
+using SportArete.Core.Data;
 using SportArete.Core.Models.Product;
 using SportArete.Core.Services;
+using SportArete.Infrastructure.Data.Models;
+using System.Security.Claims;
 
 namespace SportArete.Controllers
 {
     [Authorize]
     public class ProductController : Controller
     {
+
+        private readonly ApplicationDbContext context;
         private readonly IProductService productService;
 
-        public ProductController(IProductService _productService)
+        public ProductController(
+            IProductService _productService,
+            ApplicationDbContext _context)
         {
             productService = _productService;
+            context = _context;
         }
 
         [HttpGet]
@@ -49,6 +58,43 @@ namespace SportArete.Controllers
 
                 return View(addProductViewModel);
             }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> All()
+        {
+            var model = await productService.GetAllAsync();
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Detail(int id)
+        {
+            var product = await context.Products
+                .Where(p => p.Id == id)
+                .Select(p => new DetailedProductViewModel()
+                {
+                    Id = p.Id,
+                    Model = p.Model,
+                    Description = p.Description,
+                    Size = p.Size,
+                    Price = p.Price,
+                    ImageData = p.ImageData,
+                    Category = p.Category.Name,
+                    Brand = p.Brand.Name
+
+
+                }).FirstOrDefaultAsync();
+
+            if (product != null)
+            {
+                return View(product);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

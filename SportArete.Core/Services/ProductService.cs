@@ -32,11 +32,11 @@ namespace SportArete.Core.Services
             await repo.AddAsync(entity);
             await repo.SaveChangesAsync();
         }
-        public async Task<IEnumerable<TopProductViewModel>> GetTopAsync()
+        public async Task<IEnumerable<ProductViewModel>> GetTopAsync()
         {
             return await repo.AllReadonly<Product>()
                 .OrderByDescending(h => h.ViewsCount)
-                .Select(h => new TopProductViewModel()
+                .Select(h => new ProductViewModel()
                 {
                     Id = h.Id,
                     Model = h.Model,
@@ -57,6 +57,28 @@ namespace SportArete.Core.Services
         public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             return await repo.All<Category>().ToListAsync();
+        }
+
+        public async Task<Product> GetDetailedProductAsync(int productId)
+        {
+            return await repo.GetByIdAsync<Product>(productId);
+        }
+
+        public async Task<IEnumerable<ProductViewModel>> GetAllAsync()
+        {
+            return await repo.AllReadonly<Product>()
+                .OrderByDescending(h => h.ViewsCount)
+                .Select(h => new ProductViewModel()
+                {
+                    Id = h.Id,
+                    Model = h.Model,
+                    Price = h.Price,
+                    ImageData = h.ImageData,
+                    Category = h.Category.Name,
+                    Brand = h.Brand.Name
+                })
+                .OrderBy(p=>p.Category)
+                .ToListAsync();
         }
     }
 }

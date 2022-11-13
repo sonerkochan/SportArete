@@ -9,6 +9,9 @@ namespace SportArete.Core.Contracts
         Task<IEnumerable<Brand>> GetBrandsAsync();
         Task AddProductAsync(AddProductViewModel model);
 
-        Task<IEnumerable<TopProductViewModel>> GetTopAsync();
+        Task<IEnumerable<ProductViewModel>> GetTopAsync();
+        Task<IEnumerable<ProductViewModel>> GetAllAsync();
+
+        Task<Product> GetDetailedProductAsync(int productId);
     }
 }
