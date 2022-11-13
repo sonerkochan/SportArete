@@ -1,7 +1,7 @@
 ﻿@model DetailedProductViewModel
 
 @{
-    ViewBag.Title = "Detailed Product";
+    ViewBag.Title = Model.Brand + " " + Model.Model;
 }
 
 
@@ -9,6 +9,18 @@
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
+<div class="d-flex justify-content-center">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <img class="card-img-top" style="width: auto; height: 250px;"
+                 src="@Model.ImageData" alt="Product Image">
+             </div>
+
+            <div class="col-12 col-md-6">
+                    <h5 class="card-title mt-1">@Model.Description</h5>
+            </div>
+        </div>
+</div>
 
 
 @section Scripts {
