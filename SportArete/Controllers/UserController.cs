@@ -47,7 +47,8 @@ namespace SportArete.Controllers
             var user = new User()
             {
                 Email = model.Email,
-                UserName = model.UserName
+                UserName = model.UserName,
+                Cart = new Cart()
             };
 
             var result = await userManager.CreateAsync(user, model.Password);

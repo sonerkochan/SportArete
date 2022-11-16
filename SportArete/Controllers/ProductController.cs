@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using SportArete.Core.Contracts;
 using SportArete.Core.Data;
 using SportArete.Core.Models.Product;
-using SportArete.Core.Services;
 using SportArete.Infrastructure.Data.Models;
-using System.Security.Claims;
 
 namespace SportArete.Controllers
 {
@@ -73,6 +70,14 @@ namespace SportArete.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Detail(int id)
         {
+            Product viewedProduct = await context.Products
+                .Where(p => p.Id == id)
+                .FirstOrDefaultAsync();
+            viewedProduct.ViewsCount++;
+
+            await context.SaveChangesAsync();
+
+
             var product = await context.Products
                 .Where(p => p.Id == id)
                 .Select(p => new DetailedProductViewModel()
@@ -88,6 +93,7 @@ namespace SportArete.Controllers
 
 
                 }).FirstOrDefaultAsync();
+
 
             if (product != null)
             {
