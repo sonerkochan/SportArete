@@ -21,6 +21,11 @@ namespace SportArete.Core.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<CartProduct>()
+                .HasKey(x => new { x.CartId, x.ProductId });
+            builder.Entity<OrderProduct>()
+                .HasKey(x => new { x.OrderId, x.ProductId });
+
             builder.Entity<User>()
                 .Property(u => u.UserName)
                 .HasMaxLength(UserNameMaxLength)
@@ -34,6 +39,9 @@ namespace SportArete.Core.Data
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new BrandConfiguration());
             builder.ApplyConfiguration(new ProductConfiguration());
+            builder.ApplyConfiguration(new RoleConfigration());
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new UserRolesConfiguration());
 
             base.OnModelCreating(builder);
         }

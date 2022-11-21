@@ -36,6 +36,7 @@ namespace SportArete.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Add(AddProductViewModel addProductViewModel)
         {
             if (!ModelState.IsValid)

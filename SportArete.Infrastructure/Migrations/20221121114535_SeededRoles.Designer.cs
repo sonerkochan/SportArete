@@ -12,8 +12,8 @@ using SportArete.Core.Data;
 namespace SportArete.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221111152156_UpdateCartRelationsMigration")]
-    partial class UpdateCartRelationsMigration
+    [Migration("20221121114535_SeededRoles")]
+    partial class SeededRoles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,22 @@ namespace SportArete.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "d9de7285-b674-454c-9889-5210abb8d347",
+                            ConcurrencyStamp = "ca645afa-5c98-4172-b1cb-aed4c3c81f11",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "07358494-247c-421c-8f7f-82c12be55276",
+                            ConcurrencyStamp = "c26d6f36-d670-4df8-a01d-512105e6c2ba",
+                            Name = "Member",
+                            NormalizedName = "MEMBER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -224,9 +240,28 @@ namespace SportArete.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("SportArete.Infrastructure.Data.Models.CartProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CartId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.ToTable("CartProduct");
                 });
 
             modelBuilder.Entity("SportArete.Infrastructure.Data.Models.Category", b =>
@@ -277,9 +312,6 @@ namespace SportArete.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsComplete")
                         .HasColumnType("bit");
 
@@ -292,9 +324,22 @@ namespace SportArete.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartId");
-
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("SportArete.Infrastructure.Data.Models.OrderProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderProduct");
                 });
 
             modelBuilder.Entity("SportArete.Infrastructure.Data.Models.Product", b =>
@@ -306,9 +351,6 @@ namespace SportArete.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("BrandId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CartId")
                         .HasColumnType("int");
 
                     b.Property<int?>("CategoryId")
@@ -349,8 +391,6 @@ namespace SportArete.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
-
-                    b.HasIndex("CartId");
 
                     b.HasIndex("CategoryId");
 
@@ -393,9 +433,6 @@ namespace SportArete.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CartId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -445,8 +482,6 @@ namespace SportArete.Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CartId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -510,15 +545,34 @@ namespace SportArete.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SportArete.Infrastructure.Data.Models.Order", b =>
+            modelBuilder.Entity("SportArete.Infrastructure.Data.Models.CartProduct", b =>
                 {
-                    b.HasOne("SportArete.Infrastructure.Data.Models.Cart", "Cart")
+                    b.HasOne("SportArete.Infrastructure.Data.Models.Cart", null)
+                        .WithMany("ProductIds")
+                        .HasForeignKey("CartId");
+
+                    b.HasOne("SportArete.Infrastructure.Data.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("CartId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cart");
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("SportArete.Infrastructure.Data.Models.OrderProduct", b =>
+                {
+                    b.HasOne("SportArete.Infrastructure.Data.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SportArete.Infrastructure.Data.Models.Order", null)
+                        .WithMany("ProductIds")
+                        .HasForeignKey("OrderId");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("SportArete.Infrastructure.Data.Models.Product", b =>
@@ -528,10 +582,6 @@ namespace SportArete.Infrastructure.Migrations
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("SportArete.Infrastructure.Data.Models.Cart", null)
-                        .WithMany("Products")
-                        .HasForeignKey("CartId");
 
                     b.HasOne("SportArete.Infrastructure.Data.Models.Category", "Category")
                         .WithMany("Products")
@@ -544,17 +594,6 @@ namespace SportArete.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("SportArete.Infrastructure.Data.Models.User", b =>
-                {
-                    b.HasOne("SportArete.Infrastructure.Data.Models.Cart", "Cart")
-                        .WithMany()
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cart");
-                });
-
             modelBuilder.Entity("SportArete.Infrastructure.Data.Models.Brand", b =>
                 {
                     b.Navigation("Products");
@@ -562,12 +601,17 @@ namespace SportArete.Infrastructure.Migrations
 
             modelBuilder.Entity("SportArete.Infrastructure.Data.Models.Cart", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("ProductIds");
                 });
 
             modelBuilder.Entity("SportArete.Infrastructure.Data.Models.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("SportArete.Infrastructure.Data.Models.Order", b =>
+                {
+                    b.Navigation("ProductIds");
                 });
 #pragma warning restore 612, 618
         }

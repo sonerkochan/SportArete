@@ -1,6 +1,13 @@
-﻿namespace SportArete.Core.Contracts
+﻿using SportArete.Core.Models.Product;
+using SportArete.Infrastructure.Data.Models;
+using System.Security.Claims;
+
+namespace SportArete.Core.Contracts
 {
     public interface ICartService
     {
+        Task AddToCartAsync(string userId, int productId);
+        Task CreateCartForUser(string userId);
+        Task<IEnumerable<ProductViewModel>> GetAllAsync(string userId);
     }
 }

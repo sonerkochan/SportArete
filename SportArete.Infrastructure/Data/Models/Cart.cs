@@ -8,7 +8,9 @@ namespace SportArete.Infrastructure.Data.Models
         [Key]
         public int Id { get; set; }
 
-        public IEnumerable<Product> Products { get; set; } = new List<Product>();
+        public string UserId { get; set; }
+
+        public List<CartProduct> ProductIds { get; set; } = new List<CartProduct>();
 
 
     }

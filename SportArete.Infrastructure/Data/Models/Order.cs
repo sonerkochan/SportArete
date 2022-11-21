@@ -10,7 +10,7 @@ namespace SportArete.Infrastructure.Data.Models
 
         public DateTime OrderDate { get; set; }
 
-        public Cart Cart { get; set; } = null!;
+        public IEnumerable<OrderProduct> ProductIds { get; set; } = new List<OrderProduct>();
         public string UserId { get; set; } = null!;
 
         public bool IsComplete { get; set; } = false;

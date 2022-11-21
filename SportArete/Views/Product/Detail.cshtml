@@ -12,18 +12,20 @@
 <div class="d-flex justify-content-center">
         <div class="row">
             <div class="col-12 col-md-6">
-                <img class="card-img-top" style="width: auto; height: 250px;"
-                 src="@Model.ImageData" alt="Product Image">
-             </div>
+                    <img class="card-img-top" style="width: auto; height: 250px;"
+                     src="@Model.ImageData" alt="Product Image">
+            </div>
 
             <div class="col-12 col-md-6">
-            <h5 class="card-title mt-1">@Model.Description</h5>
-            <h5 class="card-title mt-1">SIZE: @Model.Size EU</h5>
-            <h5 class="card-title mt-1">PRICE: @Model.Price BGN</h5>
-        </div>
-        <button>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Detail" asp-route-id="@Model.Id">Add to cart</a>
-        </button>
+                <h5 class="card-title mt-1">@Model.Description</h5>
+                <h5 class="card-title mt-1">SIZE: @Model.Size EU</h5>
+                <h5 class="card-title mt-1">PRICE: @Model.Price BGN</h5>
+            </div>
+
+            <form asp-controller="Cart" asp-action="Add" asp-route-productId="@Model.Id" method="post">
+            <input class="btn btn-primary" type="submit" value="Add To Cart"/>
+            </form>
+
            
         </div>
 </div>
