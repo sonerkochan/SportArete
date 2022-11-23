@@ -19,6 +19,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Password.RequiredLength = PasswordMinLength;
     options.Password.RequireNonAlphanumeric = false;
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.ConfigureApplicationCookie(options =>

@@ -47,7 +47,7 @@ namespace SportArete.Controllers
 
             var cartProducts = repo.AllReadonly<CartProduct>().Where(c => c.CartId == cart.Id);
 
-            if(cartProducts.Any(cp=>cp.ProductId==productId))
+            if (cartProducts.Any(cp => cp.ProductId == productId))
             {
                 return RedirectToAction(nameof(MyCart));
             }
@@ -68,6 +68,16 @@ namespace SportArete.Controllers
             var model = await cartService.GetAllAsync(userId);
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Remove(int productId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            await cartService.RemoveFromCartAsync(userId, productId);
+
+            return RedirectToAction(nameof(MyCart));
         }
     }
 }

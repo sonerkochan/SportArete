@@ -24,6 +24,7 @@ namespace SportArete.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Add()
         {
             var model = new AddProductViewModel()

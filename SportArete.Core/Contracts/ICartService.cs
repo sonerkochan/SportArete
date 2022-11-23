@@ -7,6 +7,7 @@ namespace SportArete.Core.Contracts
     public interface ICartService
     {
         Task AddToCartAsync(string userId, int productId);
+        Task RemoveFromCartAsync(string userId, int productId);
         Task CreateCartForUser(string userId);
         Task<IEnumerable<ProductViewModel>> GetAllAsync(string userId);
     }

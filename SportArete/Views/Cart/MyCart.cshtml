@@ -25,6 +25,9 @@
                 <h5 class="card-title mt-1">@product.Brand @product.Model</h5>
                 <p class="mb-0">Price: @product.Price BGN</p>
             </div>
+            <form asp-controller="Cart" asp-action="Remove" asp-route-productId="@product.Id" method="post">
+                <input class="btn btn-primary" type="submit" value="Remove" />
+            </form>
         </div>
     }
     @if(Model.Count()!=0)
