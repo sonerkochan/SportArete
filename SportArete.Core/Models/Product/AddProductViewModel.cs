@@ -4,6 +4,9 @@ using static SportArete.Infrastructure.Data.Constants.GlobalConstants;
 
 namespace SportArete.Core.Models.Product
 {
+    /// <summary>
+    /// View model for adding a new product
+    /// </summary>
     public class AddProductViewModel
     {
         [Required]

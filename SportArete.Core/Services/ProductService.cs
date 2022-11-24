@@ -3,6 +3,7 @@ using SportArete.Core.Contracts;
 using SportArete.Core.Models.Product;
 using SportArete.Infrastructure.Data.Common;
 using SportArete.Infrastructure.Data.Models;
+using System.ComponentModel;
 
 namespace SportArete.Core.Services
 {
@@ -15,6 +16,7 @@ namespace SportArete.Core.Services
             repo = _repo;
         }
 
+        [Description("Creates a new product and adds it to the database.")]
         public async Task AddProductAsync(AddProductViewModel model)
         {
             var entity = new Product()
@@ -32,6 +34,8 @@ namespace SportArete.Core.Services
             await repo.AddAsync(entity);
             await repo.SaveChangesAsync();
         }
+
+        [Description("Returns the top 3 products(Most viewed 3 products).")]
         public async Task<IEnumerable<ProductViewModel>> GetTopAsync()
         {
             return await repo.AllReadonly<Product>()
@@ -49,21 +53,25 @@ namespace SportArete.Core.Services
                 .ToListAsync();
         }
 
+        [Description("Returns all brands as a list.")]
         public async Task<IEnumerable<Brand>> GetBrandsAsync()
         {
             return await repo.All<Brand>().ToListAsync();
         }
 
+        [Description("Returns all categories as a list.")]
         public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             return await repo.All<Category>().ToListAsync();
         }
 
+        [Description("Returns a selected product.")]
         public async Task<Product> GetDetailedProductAsync(int productId)
         {
             return await repo.GetByIdAsync<Product>(productId);
         }
 
+        [Description("Returns all product.")]
         public async Task<IEnumerable<ProductViewModel>> GetAllAsync()
         {
             return await repo.AllReadonly<Product>()

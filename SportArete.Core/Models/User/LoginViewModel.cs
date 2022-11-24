@@ -2,6 +2,9 @@
 
 namespace SportArete.Core.Models.User
 {
+    /// <summary>
+    /// View model to pass data while logging in.
+    /// </summary>
     public class LoginViewModel
     {
         [Required]

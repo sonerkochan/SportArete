@@ -1,5 +1,8 @@
 ﻿namespace SportArete.Core.Models.Product
 {
+    /// <summary>
+    /// View model for visualizing a selected product
+    /// </summary>
     public class DetailedProductViewModel
     {
         public int Id { get; set; }

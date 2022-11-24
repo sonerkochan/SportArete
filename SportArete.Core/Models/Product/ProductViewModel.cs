@@ -2,6 +2,9 @@
 {
     public class ProductViewModel
     {
+        /// <summary>
+        /// View model for visualizing products while browsing the app.
+        /// </summary>
         public int Id { get; set; }
 
         public string Model { get; set; }

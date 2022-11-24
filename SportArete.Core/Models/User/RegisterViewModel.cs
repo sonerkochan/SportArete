@@ -3,6 +3,9 @@ using static SportArete.Infrastructure.Data.Constants.GlobalConstants;
 
 namespace SportArete.Core.Models.User
 {
+    /// <summary>
+    /// View model to pass data while registering a new user.
+    /// </summary>
     public class RegisterViewModel
     {
         [Required]

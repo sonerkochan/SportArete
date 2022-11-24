@@ -6,6 +6,7 @@ using System.Security.Claims;
 using SportArete.Core.Models.Product;
 using Microsoft.EntityFrameworkCore;
 using SportArete.Core.Data;
+using System.ComponentModel;
 
 namespace SportArete.Core.Services
 {
@@ -21,6 +22,7 @@ namespace SportArete.Core.Services
             context = _context;
         }
 
+        [Description("Adds a selected product to the cart of the user.")]
         public async Task AddToCartAsync(string userId, int productId)
         {
             Cart cart = await repo.All<Cart>()
@@ -38,6 +40,7 @@ namespace SportArete.Core.Services
             await repo.SaveChangesAsync();
         }
 
+        [Description("Upon registration a user does not have a cart, after trying to see their cart or add one, a cart gets created.")]
         public async Task CreateCartForUser(string userId)
         {
             var cart = new Cart()
@@ -49,6 +52,7 @@ namespace SportArete.Core.Services
             await repo.SaveChangesAsync();
         }
 
+        [Description("Returns all products in the user's cart.")]
         public async Task<IEnumerable<ProductViewModel>> GetAllAsync(string userId)
         {
             Cart cart = await repo.All<Cart>()
@@ -71,6 +75,7 @@ namespace SportArete.Core.Services
                 .ToListAsync();
         }
 
+        [Description("Removes a selected product from the cart.")]
         public async Task RemoveFromCartAsync(string userId, int productId)
         {
             Cart cart = await repo.All<Cart>()
