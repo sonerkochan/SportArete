@@ -99,7 +99,9 @@ namespace SportArete.Controllers
 
             if (product != null)
             {
-                return View(product);
+                ModelState.AddModelError("", "Something went wrong");
+
+                return View("All","Product");
             }
 
             return RedirectToAction("Index", "Home");
