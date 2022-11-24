@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using static SportArete.Infrastructure.Data.Constants.GlobalConstants;
 
 namespace SportArete.Infrastructure.Data.Models
 {
@@ -7,6 +7,25 @@ namespace SportArete.Infrastructure.Data.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
+        [StringLength(FullNameMaxLength)]
+        public string FullName { get; set; }
+
+        [Required]
+        [StringLength(PhoneMaxLength)]
+        public string Phone { get; set; }
+
+        [Required]
+        [StringLength(AddressMaxLength)]
+        public string Address { get; set; }
+
+        [Required]
+        [StringLength(PostalCodeMaxLength)]
+        public string PostalCode { get; set; }
+
+        [Required]
+        public decimal TotalPrice { get; set; }
 
         public DateTime OrderDate { get; set; }
 
