@@ -1,0 +1,25 @@
+﻿@using SportArete.Infrastructure.Data.Models;
+@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Sport Arete</h1>
+</div>
+
+<div class="text-center">
+    <h2 class="display-4">@ViewBag.Title</h2>
+</div>
+
+<div class="d-flex justify-content-center">
+    @foreach (var category in Model)
+    {
+            <div id="divActivites" style="border:1px solid black; margin-right: 10px">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Category" asp-route-categoryId="@category.Id" >
+                <h1>@category.Name</h1>
+                </a>
+            </div>
+    }
+</div>

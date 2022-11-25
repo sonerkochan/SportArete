@@ -104,5 +104,23 @@ namespace SportArete.Controllers
 
             return RedirectToAction("All", "Products");
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Brand(int brandId)
+        {
+            var model = await productService.GetAllByBrandAsync(brandId);
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Category(int categoryId)
+        {
+            var model = await productService.GetAllByCategoryAsync(categoryId);
+
+            return View(model);
+        }
     }
 }
