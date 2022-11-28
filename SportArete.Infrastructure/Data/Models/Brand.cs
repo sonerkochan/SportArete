@@ -15,6 +15,6 @@ namespace SportArete.Infrastructure.Data.Models
         [Required]
         [StringLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
-        public IEnumerable<Product> Products { get; set; } = new List<Product>();
+        public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }

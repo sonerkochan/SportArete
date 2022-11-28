@@ -43,6 +43,8 @@ namespace SportArete.Infrastructure.Data.Models
         [ForeignKey(nameof(BrandId))]
         public Brand Brand { get; set; } = null!;
 
+        public virtual ICollection<Review> Reviews { get; set; }
+
         public bool IsAvailable { get; set; } = true;
 
 
