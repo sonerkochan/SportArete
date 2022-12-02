@@ -10,5 +10,6 @@ namespace SportArete.Core.Contracts
         Task RemoveFromCartAsync(string userId, int productId);
         Task CreateCartForUser(string userId);
         Task<IEnumerable<ProductViewModel>> GetAllAsync(string userId);
+        bool AnyProducts(string userId);
     }
 }

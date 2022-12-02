@@ -90,5 +90,10 @@ namespace SportArete.Core.Services
             context.Remove<CartProduct>(removed);
             await context.SaveChangesAsync();
         }
+
+        public bool AnyProducts(string userId)
+        {
+            return repo.All<CartProduct>().Any(x => x.Cart.UserId == userId);
+        }
     }
 }
