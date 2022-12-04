@@ -64,7 +64,16 @@ namespace SportArete.Core.Services
 
         public async Task AddOrderAsync(AddOrderViewModel model, string userId)
         {
-            decimal totalPrice = repo.All<Product>().Sum(p => p.Price);
+            var productsIds = GetAllProductIds(userId);
+
+            decimal totalPrice = 0;
+
+            foreach (var productId in productsIds)
+            {
+                totalPrice += repo.All<Product>().Where(p => p.Id == productId).FirstOrDefault().Price;
+            }
+
+            //decimal totalPrice = repo.All<Product>().Sum(p => p.Price);
 
             var entity = new Order()
             {
@@ -82,8 +91,6 @@ namespace SportArete.Core.Services
             await repo.SaveChangesAsync();
 
             int orderId = repo.All<Order>().OrderByDescending(x => x.Id).FirstOrDefault().Id;
-
-            var productsIds = GetAllProductIds(userId);
 
             foreach (var productId in productsIds)
             {
