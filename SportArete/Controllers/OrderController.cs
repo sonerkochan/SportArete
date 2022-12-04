@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SportArete.Core.Contracts;
 using SportArete.Core.Data;
-using SportArete.Core.Models.Product;
-using SportArete.Core.Services;
+using SportArete.Core.Models.Order;
 using SportArete.Infrastructure.Data.Common;
 using SportArete.Infrastructure.Data.Models;
 using System.Security.Claims;
@@ -37,19 +35,42 @@ namespace SportArete.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            if (cartService.AnyProducts(this.User.Identity.Name))
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!cartService.AnyProducts(userId))
             {
                 return RedirectToAction("Index", "Home");
             }
 
 
-            return View();
+            var productsIds = orderService.GetAllProductIds(userId);
+
+            var model = new AddOrderViewModel();
+
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int[] productIds)
+        public async Task<IActionResult> Create(AddOrderViewModel addOrderViewModel)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View(addOrderViewModel);
+            }
+
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                await orderService.AddOrderAsync(addOrderViewModel, userId);
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Something went wrong");
+
+                return View(addOrderViewModel);
+            }
+
         }
 
         [HttpGet]

@@ -1,4 +1,5 @@
-﻿using SportArete.Core.Models.Product;
+﻿using SportArete.Core.Models.Order;
+using SportArete.Core.Models.Product;
 using SportArete.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace SportArete.Core.Contracts
     {
         Task CreateOrderForUser(string userId);
         List<int> GetAllProductIds(string userId);
+        Task AddOrderAsync(AddOrderViewModel model, string userId);
 
     }
 }

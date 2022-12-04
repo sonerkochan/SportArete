@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
 using SportArete.Core.Contracts;
 using SportArete.Core.Data;
-using SportArete.Core.Models.Product;
+using SportArete.Core.Models.Order;
 using SportArete.Infrastructure.Data.Common;
 using SportArete.Infrastructure.Data.Models;
-using System.Net;
+using System.Security.Claims;
 
 namespace SportArete.Core.Services
 {
@@ -12,13 +12,19 @@ namespace SportArete.Core.Services
     {
 
         private readonly IRepository repo;
+        private readonly ICartService cartService;
         private readonly ApplicationDbContext context;
+        private readonly UserManager<User> userManager;
         public OrderService(
             ApplicationDbContext _context,
-            IRepository _repo)
+            IRepository _repo,
+            UserManager<User> _userManager,
+            ICartService _cartService)
         {
             repo = _repo;
             context = _context;
+            userManager = _userManager;
+            cartService = _cartService;
         }
 
         public async Task CreateOrderForUser(string userId)
@@ -54,6 +60,44 @@ namespace SportArete.Core.Services
             
 
             return productIds;
+        }
+
+        public async Task AddOrderAsync(AddOrderViewModel model, string userId)
+        {
+            decimal totalPrice = repo.All<Product>().Sum(p => p.Price);
+
+            var entity = new Order()
+            {
+                FullName = model.FullName,
+                Phone = model.Phone,
+                Address = model.Address,
+                PostalCode = model.PostalCode,
+                TotalPrice = totalPrice,
+                OrderDate = DateTime.Today,
+                UserId = userId,
+                IsComplete = true
+            };
+
+            await repo.AddAsync(entity);
+            await repo.SaveChangesAsync();
+
+            int orderId = repo.All<Order>().OrderByDescending(x => x.Id).FirstOrDefault().Id;
+
+            var productsIds = GetAllProductIds(userId);
+
+            foreach (var productId in productsIds)
+            {
+                OrderProduct orderProduct = new OrderProduct()
+                {
+                    ProductId = productId,
+                    OrderId = orderId
+                };
+                await repo.AddAsync(orderProduct);//Check if OrderProduct is created
+            }
+
+            cartService.ClearCartAsync(userId, productsIds);
+
+            await repo.SaveChangesAsync();
         }
     }
 }
