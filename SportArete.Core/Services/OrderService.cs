@@ -4,6 +4,7 @@ using SportArete.Core.Data;
 using SportArete.Core.Models.Order;
 using SportArete.Infrastructure.Data.Common;
 using SportArete.Infrastructure.Data.Models;
+using System.ComponentModel;
 using System.Security.Claims;
 
 namespace SportArete.Core.Services
@@ -27,6 +28,7 @@ namespace SportArete.Core.Services
             cartService = _cartService;
         }
 
+        [Description("Creates an empty order which will be filled later..")]
         public async Task CreateOrderForUser(string userId)
         {
             var order = new Order()
@@ -44,6 +46,7 @@ namespace SportArete.Core.Services
             await repo.SaveChangesAsync();
         }
 
+        [Description("Returns all ids of the products that the user has in their cart")]
         public List<int> GetAllProductIds(string userId)
         {
             List<int> productIds = new List<int>();
@@ -62,6 +65,7 @@ namespace SportArete.Core.Services
             return productIds;
         }
 
+        [Description("Creates an order and clears the cart of the current user.")]
         public async Task AddOrderAsync(AddOrderViewModel model, string userId)
         {
             var productsIds = GetAllProductIds(userId);

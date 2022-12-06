@@ -89,6 +89,7 @@ namespace SportArete.Core.Services
                 .ToListAsync();
         }
 
+        [Description("Returns products that are from a given brand.")]
         public async Task<IEnumerable<ProductViewModel>> GetAllByBrandAsync(int brandId)
         {
             return await repo.AllReadonly<Product>()
@@ -107,6 +108,7 @@ namespace SportArete.Core.Services
                 .ToListAsync();
         }
 
+        [Description("Returns products that are from a given Category.")]
         public async Task<IEnumerable<ProductViewModel>> GetAllByCategoryAsync(int categoryId)
         {
             return await repo.AllReadonly<Product>()
