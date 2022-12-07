@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static SportArete.Infrastructure.Data.Constants.GlobalConstants;
 
-namespace SportArete.Infrastructure.Data.Models
+namespace SportArete.Core.Models.Brand
 {
-    public class Brand
+    /// <summary>
+    /// View model for adding a new brand
+    /// </summary>
+    public class AddBrandViewModel
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         [StringLength(BrandNameMaxLength)]
         public string Name { get; set; } = null!;
@@ -15,6 +15,5 @@ namespace SportArete.Infrastructure.Data.Models
         [Required]
         [StringLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
-        public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }

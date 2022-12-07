@@ -36,5 +36,10 @@
             Total Price: @Model.Sum(m=>m.Price) BGN.
         </h1>
 
+        <div>
+            <form asp-controller="Order" asp-action="Create" method="get">
+                <input class="btn btn-primary" type="submit" value="Delivery" />
+            </form>
+        </div>
     }
 </div>

@@ -1,3 +1,24 @@
-﻿<button type="button">
-    <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Add">Add a new product</a>
-</button>
+﻿
+<html>
+
+<head>
+    <title>Admin Menu</title>
+    <link href="~/css/buttons.css" rel="stylesheet" type="text/css" />
+</head>
+
+
+<body>
+    <button type="button" class="button" style="border:1px solid black; margin-right: 10px">
+        <div>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Add">Add a new product</a>
+        </div>
+    </button>
+    <button type="button" class="button" style="border:1px solid black; margin-right: 10px">
+        <div>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Brand" asp-action="Add">Add a new brand</a>
+        </div>
+    </button>
+</body>
+
+
+</html>

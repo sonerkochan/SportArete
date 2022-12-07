@@ -21,5 +21,8 @@ namespace SportArete.Infrastructure.Data.Models
 
         [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; }
+
+        [Required]
+        public decimal Price { get; set; }
     }
 }

@@ -34,6 +34,7 @@ namespace SportArete.Core.Models.Product
         public IEnumerable<Category> Categories { get; set; } = new List<Category>();
 
         public int BrandId { get; set; }
-        public IEnumerable<Brand> Brands { get; set; } = new List<Brand>();
+        public IEnumerable<SportArete.Infrastructure.Data.Models.Brand> Brands { get; set; } = 
+            new List<SportArete.Infrastructure.Data.Models.Brand>();
     }
 }

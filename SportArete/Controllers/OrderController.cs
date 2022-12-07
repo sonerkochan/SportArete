@@ -1,22 +1,76 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SportArete.Core.Contracts;
+using SportArete.Core.Data;
+using SportArete.Core.Models.Order;
+using SportArete.Infrastructure.Data.Common;
 using SportArete.Infrastructure.Data.Models;
+using System.Security.Claims;
 
 namespace SportArete.Controllers
 {
     [Authorize]
     public class OrderController : Controller
     {
-        [HttpGet]
-        public async Task<IActionResult> Shipment(Cart cart)
+        private readonly ApplicationDbContext context;
+        private readonly IRepository repo;
+        private readonly IOrderService orderService;
+        private readonly ICartService cartService;
+        private readonly UserManager<User> userManager;
+
+        public OrderController(
+            IOrderService _orderService,
+            ApplicationDbContext _context,
+            IRepository _repo,
+            UserManager<User> _userManager,
+            ICartService _cartService)
         {
-            return View();
+            orderService = _orderService;
+            context = _context;
+            repo = _repo;
+            userManager = _userManager;
+            cartService = _cartService;
+        }
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!cartService.AnyProducts(userId))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
+            var productsIds = orderService.GetAllProductIds(userId);
+
+            var model = new AddOrderViewModel();
+
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Shipment(int i)
+        public async Task<IActionResult> Create(AddOrderViewModel addOrderViewModel)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View(addOrderViewModel);
+            }
+
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                await orderService.AddOrderAsync(addOrderViewModel, userId);
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Something went wrong");
+
+                return View(addOrderViewModel);
+            }
+
         }
 
         [HttpGet]

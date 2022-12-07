@@ -90,5 +90,32 @@ namespace SportArete.Core.Services
             context.Remove<CartProduct>(removed);
             await context.SaveChangesAsync();
         }
+
+        [Description("Clears all products from a given user's cart")]
+        public async Task ClearCartAsync(string userId, List<int> productIds)
+        {
+            Cart cart = await repo.All<Cart>()
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            int cartId = cart.Id;
+
+            foreach (var id in productIds)
+            {
+                CartProduct removed = await repo.All<CartProduct>()
+                .Where(cp => cp.CartId == cartId)
+                .FirstOrDefaultAsync(cp => cp.ProductId == id);
+
+                context.Remove<CartProduct>(removed);
+            }
+
+            await context.SaveChangesAsync();
+        }
+
+        [Description("Checks if a given user's cart contains any products. " +
+            "Retruns TRUE if contains, FALSE if does not.")]
+        public bool AnyProducts(string userId)
+        {
+            return repo.All<CartProduct>().Any(x => x.Cart.UserId == userId);
+        }
     }
 }
