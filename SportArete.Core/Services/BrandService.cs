@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace SportArete.Core.Services
 {
-    public class BrandService:IBrandService
+    public class BrandService : IBrandService
     {
 
         private readonly IRepository repo;
@@ -21,8 +21,8 @@ namespace SportArete.Core.Services
         {
             var entity = new Brand()
             {
-                Name=model.Name,
-                Description=model.Description
+                Name = model.Name,
+                Description = model.Description
             };
 
             await repo.AddAsync(entity);

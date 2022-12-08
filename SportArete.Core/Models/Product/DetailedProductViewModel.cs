@@ -22,6 +22,6 @@ namespace SportArete.Core.Models.Product
         public string Category { get; set; }
 
         public string Brand { get; set; }
-        public ICollection<ProductReview> Reviews { get; set; } = new List<ProductReview>();
+        public ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }

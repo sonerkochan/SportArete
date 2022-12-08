@@ -14,13 +14,16 @@ namespace SportArete.Controllers
 
         private readonly ApplicationDbContext context;
         private readonly IProductService productService;
+        private readonly IReviewService reviewService;
 
         public ProductController(
             IProductService _productService,
-            ApplicationDbContext _context)
+            ApplicationDbContext _context,
+            IReviewService _reviewService)
         {
             productService = _productService;
             context = _context;
+            reviewService = _reviewService;
         }
 
         [HttpGet]
@@ -79,6 +82,7 @@ namespace SportArete.Controllers
 
             await context.SaveChangesAsync();
 
+            List<Review> reviews = reviewService.GetProductReviewsAsync();
 
             var product = await context.Products
                 .Where(p => p.Id == id)
@@ -92,7 +96,7 @@ namespace SportArete.Controllers
                     ImageData = p.ImageData,
                     Category = p.Category.Name,
                     Brand = p.Brand.Name,
-                    Reviews = p.Reviews
+                    Reviews = reviews
                 }).FirstOrDefaultAsync();
 
 
