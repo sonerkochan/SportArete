@@ -1,4 +1,6 @@
-﻿namespace SportArete.Core.Models.Product
+﻿using SportArete.Infrastructure.Data.Models;
+
+namespace SportArete.Core.Models.Product
 {
     /// <summary>
     /// View model for visualizing a selected product
@@ -20,5 +22,6 @@
         public string Category { get; set; }
 
         public string Brand { get; set; }
+        public ICollection<ProductReview> Reviews { get; set; } = new List<ProductReview>();
     }
 }

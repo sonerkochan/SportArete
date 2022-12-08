@@ -18,6 +18,7 @@ namespace SportArete.Core.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -25,6 +26,8 @@ namespace SportArete.Core.Data
                 .HasKey(x => new { x.CartId, x.ProductId });
             builder.Entity<OrderProduct>()
                 .HasKey(x => new { x.OrderId, x.ProductId });
+            builder.Entity<ProductReview>()
+                .HasKey(x => new { x.ReviewId, x.ProductId });
 
             builder.Entity<User>()
                 .Property(u => u.UserName)

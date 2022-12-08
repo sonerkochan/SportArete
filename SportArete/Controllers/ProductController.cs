@@ -91,9 +91,8 @@ namespace SportArete.Controllers
                     Price = p.Price,
                     ImageData = p.ImageData,
                     Category = p.Category.Name,
-                    Brand = p.Brand.Name
-
-
+                    Brand = p.Brand.Name,
+                    Reviews = p.Reviews
                 }).FirstOrDefaultAsync();
 
 

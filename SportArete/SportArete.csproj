@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\css\buttons.css" />
+    <None Include="wwwroot\css\styling.css" />
   </ItemGroup>
 
   <ItemGroup>

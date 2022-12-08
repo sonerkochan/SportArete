@@ -5,31 +5,68 @@
 }
 
 
+<html>
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
+    <head>
+        <title>Sport Arete</title>
+        <link href="~/css/styling.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
 
-<div class="d-flex justify-content-center">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                    <img class="card-img-top" style="width: auto; height: 250px;"
-                     src="@Model.ImageData" alt="Product Image">
-            </div>
+    <body>
 
-            <div class="col-12 col-md-6">
-                <h5 class="card-title mt-1">@Model.Description</h5>
-                <h5 class="card-title mt-1">SIZE: @Model.Size EU</h5>
-                <h5 class="card-title mt-1">PRICE: @Model.Price BGN</h5>
-            </div>
+        <h2 class="text-center">@ViewBag.Title</h2>
+        <hr />
 
-                <form asp-controller="Cart" asp-action="Add" asp-route-productId="@Model.Id" method="post">
-                <input class="btn btn-primary" type="submit" value="Add To Cart"/>
-                </form>
+        <div class="d-flex justify-content-center">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                            <img class="card-img-top" style="width: auto; height: 250px;"
+                             src="@Model.ImageData" alt="Product Image">
+                    </div>
 
-           
+                    <div class="col-12 col-md-6">
+                        <h5 class="card-title mt-1">@Model.Description</h5>
+                        <h5 class="card-title mt-1">SIZE: @Model.Size EU</h5>
+                        <h5 class="card-title mt-1">PRICE: @Model.Price BGN</h5>
+                    </div>
+
+                        <form asp-controller="Cart" asp-action="Add" asp-route-productId="@Model.Id" method="post">
+                        <input class="btn btn-primary" type="submit" value="Add To Cart"/>
+                        </form>
+                </div>
         </div>
-</div>
 
+        <div class="rating">
+            @if (Model.Reviews.Count() != 0)
+            {
+                @for (int x = 1; x < 6; x++)
+                {
+                    <div class="reviewBox">
+
+                        <h2>Star Rating</h2>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+
+
+                    </div>
+                }
+        }
+        else
+        {
+            <p>There are no reviews for this product.</p>
+            @if(User.Identity.IsAuthenticated)
+            {
+                <p>Be the first one to add a review!</p>
+            }
+        }
+        </div>
+
+    </body>
+</html>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -11,3 +11,21 @@
     border-radius: 16px;
     background: #ccffff;
 }
+
+.box {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.rating {
+    display: flex;
+    flex-direction: column;
+}
+
+.checked {
+    color: orange;
+}
+
+.reviewBox {
+    border: 1px solid black;
+}

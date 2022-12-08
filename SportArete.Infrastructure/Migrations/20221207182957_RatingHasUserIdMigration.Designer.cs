@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SportArete.Core.Data;
 
@@ -11,9 +12,10 @@ using SportArete.Core.Data;
 namespace SportArete.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221207182957_RatingHasUserIdMigration")]
+    partial class RatingHasUserIdMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,14 +54,14 @@ namespace SportArete.Infrastructure.Migrations
                         new
                         {
                             Id = "d9de7285-b674-454c-9889-5210abb8d347",
-                            ConcurrencyStamp = "1af01a89-df1d-4f92-9702-59e7ebc8eead",
+                            ConcurrencyStamp = "1ac59e6d-f723-4b05-b23f-c24b758ca934",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "07358494-247c-421c-8f7f-82c12be55276",
-                            ConcurrencyStamp = "b2491c74-ecf2-47e4-a63b-da42306f3b88",
+                            ConcurrencyStamp = "7d057d0a-30ab-4598-864c-954505cdf523",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         });
@@ -463,21 +465,6 @@ namespace SportArete.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SportArete.Infrastructure.Data.Models.ProductReview", b =>
-                {
-                    b.Property<int>("ReviewId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ReviewId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductReview");
-                });
-
             modelBuilder.Entity("SportArete.Infrastructure.Data.Models.Review", b =>
                 {
                     b.Property<int>("Id")
@@ -490,6 +477,9 @@ namespace SportArete.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Raiting")
                         .HasColumnType("int");
 
@@ -499,7 +489,9 @@ namespace SportArete.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reviews");
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("SportArete.Infrastructure.Data.Models.User", b =>
@@ -573,15 +565,15 @@ namespace SportArete.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1a48e6bb-a3dd-4017-aaeb-d91dc04178ec",
+                            ConcurrencyStamp = "5b06f773-67d4-4012-b6d3-8c687a030121",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC/zRWLMk1JNJncymm/HjSd8t/eiq/hXMEPPtlho2ksfxzJqLzx/MznfFwn7GJdUIg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEInnehejGXfmZSqmO2MwY/4uxPEz70NS1n0atHoxMPr13jRJhP9k8u4VkbgN6zOPWg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f233cb2f-ced5-4d37-8ffe-d93b226bcadc",
+                            SecurityStamp = "f7dca795-aa98-4bb5-9474-9ce07d5bd520",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -589,15 +581,15 @@ namespace SportArete.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fb48814d-388e-4dfc-a8a3-e1eb3cb9ee05",
+                            ConcurrencyStamp = "5953ce20-b2a7-4da8-b4fe-c025e2158b70",
                             Email = "soner2001@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "SONER2001@MAIL.COM",
                             NormalizedUserName = "SONER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGeAjlWUA57gUlkTytJ7RbU1lDcuayfRW/heOC1Hx1tTSdDalTiDqwdrEYSJ8mGTwA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECTJ1Bqpgn5nAFsGGfgvIUs+JI/i49FfvUQswYG+a7of5Oce0fOms04AY2cuY5+0mg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "03290c8f-6749-47fd-8e0c-b711373ee82a",
+                            SecurityStamp = "a671d38a-93c4-44d2-94dc-7b1d8928a2de",
                             TwoFactorEnabled = false,
                             UserName = "Soner"
                         });
@@ -711,7 +703,7 @@ namespace SportArete.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("SportArete.Infrastructure.Data.Models.ProductReview", b =>
+            modelBuilder.Entity("SportArete.Infrastructure.Data.Models.Review", b =>
                 {
                     b.HasOne("SportArete.Infrastructure.Data.Models.Product", "Product")
                         .WithMany("Reviews")
@@ -719,15 +711,7 @@ namespace SportArete.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SportArete.Infrastructure.Data.Models.Review", "Review")
-                        .WithMany()
-                        .HasForeignKey("ReviewId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Product");
-
-                    b.Navigation("Review");
                 });
 
             modelBuilder.Entity("SportArete.Infrastructure.Data.Models.Brand", b =>
