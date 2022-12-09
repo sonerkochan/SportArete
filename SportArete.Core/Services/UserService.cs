@@ -19,5 +19,10 @@ namespace SportArete.Core.Services
         {
             return this.userManager.FindByNameAsync(username).GetAwaiter().GetResult();
         }
+
+        public string GetUserNameById(string userId)
+        {
+            return userManager.FindByIdAsync(userId).GetAwaiter().GetResult().UserName;
+        }
     }
 }

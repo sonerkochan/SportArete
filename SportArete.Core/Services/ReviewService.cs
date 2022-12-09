@@ -32,7 +32,7 @@ namespace SportArete.Core.Services
         {
             var entity = new Review()
             {
-                Raiting = model.Rating,
+                Rating = model.Rating,
                 Comment = model.Comment,
                 UserId = model.UserId,
                 ProductId = model.ProductId

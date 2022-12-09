@@ -1,4 +1,5 @@
-﻿using SportArete.Infrastructure.Data.Models;
+﻿using SportArete.Core.Models.Review;
+using SportArete.Infrastructure.Data.Models;
 
 namespace SportArete.Core.Models.Product
 {
@@ -22,6 +23,6 @@ namespace SportArete.Core.Models.Product
         public string Category { get; set; }
 
         public string Brand { get; set; }
-        public ICollection<Infrastructure.Data.Models.Review> Reviews { get; set; } = new List<Infrastructure.Data.Models.Review>();
+        public ICollection<ReviewViewModel> Reviews { get; set; } = new List<ReviewViewModel>();
     }
 }

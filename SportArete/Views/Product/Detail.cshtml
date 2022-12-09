@@ -46,17 +46,17 @@
                 <div class="reviewBox">
 
                     <h2>Star Rating</h2>
-                    @for(int i=review.Raiting;i>0;i--)
+                    @for(int i=review.Rating;i>0;i--)
                     {
                         <span class="fa fa-star checked"></span>
                     }
-                    @for(int i=review.Raiting;i<5;i++)
+                    @for (int i = review.Rating; i < 5; i++)
                     {
                         <span class="fa fa-star"></span>
                     }
 
                     <p>@review.Comment</p>
-                    <p>@review.UserId</p>
+                    <p>Review by: @review.UserName</p>
                 </div>
             }
 
