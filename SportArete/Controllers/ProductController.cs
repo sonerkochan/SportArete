@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using SportArete.Core.Contracts;
 using SportArete.Core.Data;
 using SportArete.Core.Models.Product;
+using SportArete.Core.Models.Review;
 using SportArete.Infrastructure.Data.Models;
+using System.Security.Claims;
 
 namespace SportArete.Controllers
 {
@@ -72,6 +74,42 @@ namespace SportArete.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> AddReview(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var model = new AddReviewViewModel()
+            {
+                ProductId = id,
+                UserId = userId
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddReview(AddReviewViewModel addReviewViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(addReviewViewModel);
+            }
+
+            try
+            {
+                await reviewService.AddReviewAsync(addReviewViewModel);
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Something went wrong");
+
+                return View(addReviewViewModel);
+            }
+        }
+
+        [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Detail(int id)
         {
@@ -82,7 +120,7 @@ namespace SportArete.Controllers
 
             await context.SaveChangesAsync();
 
-            List<Review> reviews = reviewService.GetProductReviewsAsync();
+            List<Review> reviews = reviewService.GetProductReviews(id);
 
             var product = await context.Products
                 .Where(p => p.Id == id)

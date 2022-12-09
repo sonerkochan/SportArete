@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SportArete.Core.Contracts;
+using SportArete.Core.Data;
 using SportArete.Core.Models.Product;
 using SportArete.Core.Models.Review;
 using SportArete.Infrastructure.Data.Common;
@@ -12,14 +14,17 @@ using System.Threading.Tasks;
 
 namespace SportArete.Core.Services
 {
-    public class ReviewService
+    public class ReviewService:IReviewService
     {
 
         private readonly IRepository repo;
+        private readonly ApplicationDbContext context;
 
-        public ReviewService(IRepository _repo)
+        public ReviewService(IRepository _repo,
+            ApplicationDbContext _context)
         {
             repo = _repo;
+            context = _context;
         }
 
         [Description("Creates a new review and adds it to the database.")]
@@ -27,39 +32,23 @@ namespace SportArete.Core.Services
         {
             var entity = new Review()
             {
-                Raiting = model.Raiting,
+                Raiting = model.Rating,
                 Comment = model.Comment,
-                UserId = model.UserId
+                UserId = model.UserId,
+                ProductId = model.ProductId
             };
 
 
             await repo.AddAsync(entity);
-
-            ProductReview productReview = new ProductReview()
-            {
-                ProductId = model.ProductId,
-                ReviewId = entity.Id
-            };
-
-            int reviewId = repo.All<Review>().OrderByDescending(x => x.Id).FirstOrDefault().Id;
-
-            await repo.AddAsync(productReview);
-
             await repo.SaveChangesAsync();
         }
 
         [Description("Returns all reviews of a current product.")]
-        public async Task<IEnumerable<ReviewViewModel>> GetAllAsync(int productId)
+        public List<Review> GetProductReviews(int productId)
         {
-            return await repo.AllReadonly<Review>()
-                .Select(r => new ReviewViewModel()
-                {
-                    Id = r.Id,
-                    Raiting = r.Raiting,
-                    Comment = r.Comment,
-                    UserId = r.UserId
-                })
-                .ToListAsync();
+            var reviews = repo.All<Review>().Where(r => r.ProductId == productId).ToList();
+
+            return reviews;
         }
     }
 }

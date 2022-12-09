@@ -40,20 +40,31 @@
         <div class="rating">
             @if (Model.Reviews.Count() != 0)
             {
-                @for (int x = 1; x < 6; x++)
+
+                @foreach(var review in Model.Reviews)
                 {
-                    <div class="reviewBox">
+                <div class="reviewBox">
 
-                        <h2>Star Rating</h2>
+                    <h2>Star Rating</h2>
+                    @for(int i=review.Raiting;i>0;i--)
+                    {
                         <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
+                    }
+                    @for(int i=review.Raiting;i<5;i++)
+                    {
                         <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
+                    }
 
+                    <p>@review.Comment</p>
+                    <p>@review.UserId</p>
+                </div>
+            }
 
-                    </div>
-                }
+            <button type="button" class="button" style="border:1px solid black; margin-right: 10px">
+                <div>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="AddReview" asp-route-id="@Model.Id">Review the product</a>
+                </div>
+            </button>
         }
         else
         {
@@ -61,6 +72,12 @@
             @if(User.Identity.IsAuthenticated)
             {
                 <p>Be the first one to add a review!</p>
+                
+            <button type="button" class="button" style="border:1px solid black; margin-right: 10px">
+                <div>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="AddReview" asp-route-id="@Model.Id">Review the product</a>
+                </div>
+            </button>
             }
         }
         </div>

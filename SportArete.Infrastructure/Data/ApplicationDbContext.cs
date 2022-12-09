@@ -26,8 +26,6 @@ namespace SportArete.Core.Data
                 .HasKey(x => new { x.CartId, x.ProductId });
             builder.Entity<OrderProduct>()
                 .HasKey(x => new { x.OrderId, x.ProductId });
-            builder.Entity<ProductReview>()
-                .HasKey(x => new { x.ReviewId, x.ProductId });
 
             builder.Entity<User>()
                 .Property(u => u.UserName)
