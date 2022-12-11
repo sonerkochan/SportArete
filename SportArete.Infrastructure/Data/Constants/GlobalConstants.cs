@@ -39,6 +39,9 @@
         public const int PostalCodeMinLength = 0;
 
 
+        public const int CommentMaxLength = 1000;
+        public const int CommentMinLength = 10;
+
 
 
 

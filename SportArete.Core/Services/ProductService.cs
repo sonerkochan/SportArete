@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.EntityFrameworkCore;
 using SportArete.Core.Contracts;
 using SportArete.Core.Models.Product;
 using SportArete.Infrastructure.Data.Common;
 using SportArete.Infrastructure.Data.Models;
 using System.ComponentModel;
+using System.Net;
 
 namespace SportArete.Core.Services
 {
@@ -76,6 +78,7 @@ namespace SportArete.Core.Services
         {
             return await repo.AllReadonly<Product>()
                 .OrderByDescending(h => h.ViewsCount)
+                .Where(h => h.IsAvailable == true)
                 .Select(h => new ProductViewModel()
                 {
                     Id = h.Id,
@@ -125,6 +128,15 @@ namespace SportArete.Core.Services
                 })
                 .OrderBy(p=>p.Category)
                 .ToListAsync();
+        }
+
+        public async Task RemoveProductAsync(int id)
+        {
+            var product = await repo.GetByIdAsync<Product>(id);
+            product.IsAvailable = false;
+
+            await repo.SaveChangesAsync();
+
         }
     }
 }

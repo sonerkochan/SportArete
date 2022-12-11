@@ -14,8 +14,7 @@ namespace SportArete.Core.Contracts
 
         Task<IEnumerable<ProductViewModel>> GetAllByBrandAsync(int brandId);
         Task<IEnumerable<ProductViewModel>> GetAllByCategoryAsync(int categoryId);
-
-
         Task<Product> GetDetailedProductAsync(int productId);
+        Task RemoveProductAsync(int id);
     }
 }
