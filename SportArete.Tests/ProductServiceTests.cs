@@ -52,6 +52,111 @@ namespace SportArete.Tests
             Assert.That(dbProduct.Description, Is.EqualTo("added product description"));
         }
 
+        [Test]
+        public async Task Test_GetTopAsync()
+        {
+            var repo = new Repository(context);
+
+            IProductService productService = new ProductService(repo);
+
+            var dbProducts = await productService.GetTopAsync();
+
+            Assert.That(dbProducts.Count(),Is.EqualTo(2));
+        }
+
+        [Test]
+        public async Task Test_GetAllAsync()
+        {
+            var repo = new Repository(context);
+
+            IProductService productService = new ProductService(repo);
+
+            var dbProducts = await productService.GetAllAsync();
+
+            Assert.That(dbProducts.Count(), Is.EqualTo(2));
+        }
+
+        [Test]
+        public async Task Test_GetBrandsAsync()
+        {
+            var repo = new Repository(context);
+
+            IProductService productService = new ProductService(repo);
+
+            var dbBrands = await productService.GetBrandsAsync();
+
+            var brand = dbBrands.Where(x => x.Id == 1).FirstOrDefault();
+
+            Assert.That(dbBrands.Count(), Is.EqualTo(5));
+            Assert.That(brand.Name == "Nike");
+        }
+
+
+        [Test]
+        public async Task Test_GetCategoriesAsync()
+        {
+            var repo = new Repository(context);
+
+            IProductService productService = new ProductService(repo);
+
+            var dbCategories = await productService.GetCategoriesAsync();
+
+            var category = dbCategories.Where(x => x.Id == 1).FirstOrDefault();
+
+            Assert.That(dbCategories.Count(), Is.EqualTo(4));
+            Assert.That(category.Name == "Clothing");
+        }
+
+        [Test]
+        public async Task Test_GetDetailedProductAsync()
+        {
+            var repo = new Repository(context);
+
+            IProductService productService = new ProductService(repo);
+
+            var detailedProduct = await productService.GetDetailedProductAsync(1);
+
+            Assert.That(detailedProduct.Model, Is.EqualTo("Air Max 270"));
+        }
+
+        [Test]
+        public async Task Test_GetAllByBrandAsync()
+        {
+            var repo = new Repository(context);
+
+            IProductService productService = new ProductService(repo);
+
+            var brandProducts = await productService.GetAllByBrandAsync(1);
+
+            Assert.That(brandProducts.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public async Task Test_GetAllByCategoryAsync()
+        {
+            var repo = new Repository(context);
+
+            IProductService productService = new ProductService(repo);
+
+            var categoryProducts = await productService.GetAllByCategoryAsync(2);
+
+            Assert.That(categoryProducts.Count(), Is.EqualTo(2));
+        }
+
+        [Test]
+        public async Task Test_RemoveProductAsync()
+        {
+            var repo = new Repository(context);
+
+            IProductService productService = new ProductService(repo);
+
+            await productService.RemoveProductAsync(1);
+
+            var product = await repo.GetByIdAsync<Product>(1);
+
+            Assert.That(product.IsAvailable, Is.False);
+        }
+
         [TearDown]
         public void TearDown()
         {
