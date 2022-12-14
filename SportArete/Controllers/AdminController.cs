@@ -7,6 +7,7 @@ using System.Security.Claims;
 
 namespace SportArete.Controllers
 {
+    //[Area(AdminAreaName)]
     [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
