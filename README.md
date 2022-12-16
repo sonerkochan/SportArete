@@ -4,7 +4,7 @@
 
 ## :pencil: Overview
 
-**Easy Rank** is a website for creating rank type pages.
+**SportArete** is a website for creating rank type pages.
 
 Users can **view** or **order** products.
 
