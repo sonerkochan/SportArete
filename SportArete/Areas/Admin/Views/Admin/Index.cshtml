@@ -1,0 +1,31 @@
+﻿
+<html>
+
+<head>
+    <title>Admin Menu</title>
+    <link href="~/css/styling.css" rel="stylesheet" type="text/css" />
+</head>
+
+
+<body>
+    <div class="mt-4 p-5 bg-light text-center">
+        <button type="button" class="button" style="border:1px solid black; margin-right: 10px">
+            <div>
+                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="Add">Add a new product</a>
+            </div>
+        </button>
+        <button type="button" class="button" style="border:1px solid black; margin-right: 10px">
+            <div>
+                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Brand" asp-action="Add">Add a new brand</a>
+            </div>
+        </button>
+        <button type="button" class="button" style="border:1px solid black; margin-right: 10px">
+            <div>
+                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="AllAvailable">Check available products</a>
+            </div>
+        </button>
+    </div>
+</body>
+
+
+</html>

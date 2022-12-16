@@ -3,6 +3,7 @@ using SportArete.Core.Contracts;
 using SportArete.Core.Models;
 using SportArete.Core.Services;
 using System.Diagnostics;
+using static SportArete.Areas.Admin.Constants.AdminConstants;
 
 namespace SportArete.Controllers
 {
@@ -23,6 +24,10 @@ namespace SportArete.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            if (User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Admin", new { area = "Admin" });
+            }
             var model = await productService.GetTopAsync();
 
             return View(model);

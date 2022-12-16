@@ -31,41 +31,6 @@ namespace SportArete.Controllers
             userService = _userService;
         }
 
-        [HttpGet]
-        [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Add()
-        {
-            var model = new AddProductViewModel()
-            {
-                Categories = await productService.GetCategoriesAsync(),
-                Brands = await productService.GetBrandsAsync()
-            };
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Add(AddProductViewModel addProductViewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(addProductViewModel);
-            }
-
-            try
-            {
-                await productService.AddProductAsync(addProductViewModel);
-
-                return RedirectToAction("Index", "Home");
-            }
-            catch (Exception)
-            {
-                ModelState.AddModelError("", "Something went wrong");
-
-                return View(addProductViewModel);
-            }
-        }
 
         [HttpGet]
         [AllowAnonymous]
