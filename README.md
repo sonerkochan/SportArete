@@ -4,7 +4,7 @@
 
 ## :pencil: Overview
 
-**SportArete** is a website for creating rank type pages.
+**SportArete** is a e-commerce website.
 
 Users can **view** or **order** products.
 
