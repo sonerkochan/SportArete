@@ -1,4 +1,5 @@
-﻿using SportArete.Infrastructure.Data.Models;
+﻿using SportArete.Core.Models.User;
+using SportArete.Infrastructure.Data.Models;
 
 namespace SportArete.Core.Contracts
 {
@@ -6,6 +7,10 @@ namespace SportArete.Core.Contracts
     {
         User GetUserByUsername(string username);
         public string GetUserNameById(string userId);
+
+        Task<IEnumerable<UserServiceModel>> All();
+
+        //Task<bool> Forget(string userId);
 
     }
 }

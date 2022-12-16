@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SportArete.Core.Contracts;
+using SportArete.Core.Models.User;
+using SportArete.Infrastructure.Data.Common;
 using SportArete.Infrastructure.Data.Models;
 using System.ComponentModel;
 
@@ -7,10 +10,14 @@ namespace SportArete.Core.Services
 {
     public class UserService : IUserService
     {
+        private readonly IRepository repo;
         private readonly UserManager<User> userManager;
 
-        public UserService(UserManager<User> _userManager)
+        public UserService(
+            IRepository _repo,
+            UserManager<User> _userManager)
         {
+            repo = _repo;
             userManager = _userManager;
         }
 
@@ -24,5 +31,26 @@ namespace SportArete.Core.Services
         {
             return userManager.FindByIdAsync(userId).GetAwaiter().GetResult().UserName;
         }
+        public async Task<IEnumerable<UserServiceModel>> All()
+        {
+            List<UserServiceModel> result;
+
+            result = await repo.AllReadonly<User>()
+                .Select(u => new UserServiceModel()
+                {
+                    UserId = u.Id,
+                    Email = u.Email,
+                    UserName = u.UserName
+                })
+                .ToListAsync();
+
+            return result;
+        }
+
+        /*
+        public async Task<bool> Forget(string userId)
+        {
+            throw new NotImplementedException();
+        }*/
     }
 }
