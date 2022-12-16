@@ -31,12 +31,6 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav">
-                        @if (User.IsInRole("Administrator"))
-                        {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Menu">Administrator Menu</a>
-                        }
-                    </ul>
                     <ul class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="MyCart">
                                 <img src="https://media.istockphoto.com/id/1206806317/vector/shopping-cart-icon-isolated-on-white-background.jpg?s=170667a&w=0&k=20&c=jFgoM27NKwD5xbu6U9gkOwlIKc1L82PlFDYlcIJwi8E="

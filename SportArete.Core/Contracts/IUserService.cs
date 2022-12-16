@@ -10,7 +10,7 @@ namespace SportArete.Core.Contracts
 
         Task<IEnumerable<UserServiceModel>> All();
 
-        //Task<bool> Forget(string userId);
+        Task<bool> Forget(string userId);
 
     }
 }

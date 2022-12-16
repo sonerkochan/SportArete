@@ -12,6 +12,7 @@
         <tr>
             <th><label>UserName</label></th>
             <th><label>Email</label></th>
+            <th><label>Actions</label></th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +21,11 @@
             <tr>
                 <td><label>@user.UserName</label></td>
                 <td><label>@user.Email</label></td>
+                <td>
+                        <form asp-area="Admin" asp-controller="User" asp-action="Forget" asp-route-userId="@user.UserId"  method="post">
+                            <button type="submit" class="btn btn-danger">Forget</button>
+                        </form>
+                </td>
             </tr>
         }
     </tbody>

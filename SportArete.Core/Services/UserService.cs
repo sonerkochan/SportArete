@@ -36,6 +36,7 @@ namespace SportArete.Core.Services
             List<UserServiceModel> result;
 
             result = await repo.AllReadonly<User>()
+                .Where(u => u.IsActive)
                 .Select(u => new UserServiceModel()
                 {
                     UserId = u.Id,
@@ -47,10 +48,21 @@ namespace SportArete.Core.Services
             return result;
         }
 
-        /*
+        
         public async Task<bool> Forget(string userId)
         {
-            throw new NotImplementedException();
-        }*/
+            var user = await userManager.FindByIdAsync(userId);
+
+            user.Email = "N/A";
+            user.IsActive = false;
+            user.NormalizedEmail = "N/A";
+            user.NormalizedUserName = "N/A";
+            user.PasswordHash = "N/A";
+            user.UserName = $"forgottenUser-{DateTime.Now.Ticks}";
+
+            var result = await userManager.UpdateAsync(user);
+
+            return result.Succeeded;
+        }
     }
 }

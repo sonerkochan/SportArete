@@ -18,5 +18,13 @@ namespace SportArete.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Forget(string userId)
+        {
+            bool result = await userService.Forget(userId);
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }
