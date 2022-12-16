@@ -28,7 +28,7 @@ Users can also leave reviews and rate the products.
 - Order the products in their cart.
 - Leave reviews on products
 
-**Anonymous** - Not logged in users :neutral_face:
+**Anonymous** - Not-logged in users :neutral_face:
 
 - Browse the catalogue.
 
