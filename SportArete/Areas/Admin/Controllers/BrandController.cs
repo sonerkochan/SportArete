@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SportArete.Core.Contracts;
 using SportArete.Core.Models.Brand;
 using SportArete.Core.Services;
 
@@ -7,9 +8,12 @@ namespace SportArete.Areas.Admin.Controllers
 {
     public class BrandController : BaseController
     {
-        public IActionResult Index()
+        private readonly IBrandService brandService;
+
+        public BrandController(
+            IBrandService _brandService)
         {
-            return View();
+            brandService = _brandService;
         }
 
         [HttpGet]
