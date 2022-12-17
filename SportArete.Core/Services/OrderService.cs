@@ -110,7 +110,7 @@ namespace SportArete.Core.Services
                 await repo.AddAsync(orderProduct);//Check if OrderProduct is created
             }
 
-            cartService.ClearCartAsync(userId, productsIds);
+            await cartService.ClearCartAsync(userId, productsIds);
 
             await repo.SaveChangesAsync();
         }

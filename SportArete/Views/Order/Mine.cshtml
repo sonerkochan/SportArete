@@ -17,7 +17,6 @@
             <th><label>Total Price</label></th>
             <th><label>Date of order</label></th>
             <th><label>Status</label></th>
-            <th><label>Actions</label></th>
         </tr>
     </thead>
     <tbody>
@@ -37,11 +36,9 @@
                     }
                     else
                     {
-                        <td>
                             <form asp-area="" asp-controller="Order" asp-action="Confirm" asp-route-orderId="@order.Id" method="post">
                                 <button type="submit" class="btn btn-success">Confirm received</button>
                             </form>
-                        </td>
                     }
                 </td>
             </tr>

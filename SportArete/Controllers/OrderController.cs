@@ -75,18 +75,6 @@ namespace SportArete.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Payment(int shipmentId)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Payment()
-        {
-            return View();
-        }
-
-        [HttpGet]
         public async Task<IActionResult> Mine()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

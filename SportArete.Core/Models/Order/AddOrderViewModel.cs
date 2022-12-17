@@ -26,6 +26,8 @@ namespace SportArete.Core.Models.Order
         [Required]
         [StringLength(PhoneMaxLength)]
         [Description("Phonenumber of the receiver")]
+        [RegularExpression("^\\+?[1-9][0-9]{7,14}$",
+            ErrorMessage = "Invalid phone number. Please use + and your country code.")]
         public string Phone { get; set; }
 
         [Required]
