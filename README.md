@@ -19,12 +19,15 @@ Users can also leave reviews and rate the products.
 
 - Add new products/brands and remove products.
 - See all registered users.
+- See all orders and their status.
 - Deactivate a user's account.
 
 **User** - logged-in user :smiley:
 - Add products to their cart.
 - Order the products in their cart.
 - Leave reviews on products
+- See their orders.
+- Confirm received orders.
 
 **Anonymous** - Not-logged in users :neutral_face:
 
