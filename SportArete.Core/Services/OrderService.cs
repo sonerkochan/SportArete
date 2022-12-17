@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SportArete.Core.Contracts;
 using SportArete.Core.Data;
 using SportArete.Core.Models.Order;
+using SportArete.Core.Models.User;
 using SportArete.Infrastructure.Data.Common;
 using SportArete.Infrastructure.Data.Models;
 using System.ComponentModel;
@@ -80,7 +82,6 @@ namespace SportArete.Core.Services
                 totalPrice += repo.All<Product>().Where(p => p.Id == productId).FirstOrDefault().Price;
             }
 
-            //decimal totalPrice = repo.All<Product>().Sum(p => p.Price);
 
             var entity = new Order()
             {
@@ -112,6 +113,53 @@ namespace SportArete.Core.Services
             cartService.ClearCartAsync(userId, productsIds);
 
             await repo.SaveChangesAsync();
+        }
+
+        [Description("Returns all orders.")]
+        public async Task<IEnumerable<OrderViewModel>> All()
+        {
+            List<OrderViewModel> result;
+
+            result = await repo.AllReadonly<Order>()
+                .Select(o => new OrderViewModel()
+                {
+                    Id = o.Id,
+                    Address = o.Address,
+                    PostalCode = o.PostalCode,
+                    TotalPrice = o.TotalPrice,
+                    OrderDate = o.OrderDate,
+                    UserId = o.UserId,
+                    IsComplete = o.IsComplete,
+                    FullName = o.FullName,
+                    Phone = o.Phone
+                })
+                .ToListAsync();
+
+            return result;
+        }
+
+        [Description("Returns all orders of a given user by his Id.")]
+        public async Task<IEnumerable<OrderViewModel>> Mine(string userId)
+        {
+            List<OrderViewModel> result;
+
+            result = await repo.AllReadonly<Order>()
+                .Where(o => o.UserId == userId)
+                .Select(o => new OrderViewModel()
+                {
+                    Id = o.Id,
+                    Address = o.Address,
+                    PostalCode = o.PostalCode,
+                    TotalPrice = o.TotalPrice,
+                    OrderDate = o.OrderDate,
+                    UserId = o.UserId,
+                    IsComplete = o.IsComplete,
+                    FullName = o.FullName,
+                    Phone = o.Phone
+                })
+                .ToListAsync();
+
+            return result;
         }
     }
 }

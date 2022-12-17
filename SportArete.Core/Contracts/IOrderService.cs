@@ -1,5 +1,6 @@
 ﻿using SportArete.Core.Models.Order;
 using SportArete.Core.Models.Product;
+using SportArete.Core.Models.User;
 using SportArete.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,10 @@ namespace SportArete.Core.Contracts
         /// <param name="userId">User's Id.</param>
         /// <returns>Task</returns>
         Task AddOrderAsync(AddOrderViewModel model, string userId);
+
+        Task<IEnumerable<OrderViewModel>> All();
+
+        Task<IEnumerable<OrderViewModel>> Mine(string userId);
 
     }
 }

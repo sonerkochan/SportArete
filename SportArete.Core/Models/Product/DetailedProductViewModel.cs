@@ -26,7 +26,7 @@ namespace SportArete.Core.Models.Product
         public decimal Price { get; set; }
 
         [Description("Link to the image of the product.")]
-        public string ImageData { get; set; } //change to byte[]
+        public string ImageData { get; set; }
 
         [Description("Name of the category of the product.")]
         public string Category { get; set; }

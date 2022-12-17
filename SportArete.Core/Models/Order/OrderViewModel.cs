@@ -1,40 +1,26 @@
-﻿using SportArete.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using static SportArete.Infrastructure.Data.Constants.GlobalConstants;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
 
 namespace SportArete.Core.Models.Order
 {
     /// <summary>
-    /// View model for adding a new order
+    /// View model of an order.
     /// </summary>
-    public class AddOrderViewModel
+    public class OrderViewModel
     {
         [Description("Id of the new order")]
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(FullNameMaxLength)]
         [Description("Fullname of the receiver")]
         public string FullName { get; set; }
 
-        [Required]
-        [StringLength(PhoneMaxLength)]
         [Description("Phonenumber of the receiver")]
         public string Phone { get; set; }
 
-        [Required]
-        [StringLength(AddressMaxLength)]
         [Description("Address of the reciever.")]
         public string Address { get; set; }
 
-        [Required]
-        [StringLength(PostalCodeMaxLength)]
         [Description("Postal code of the address.")]
         public string PostalCode { get; set; }
 
@@ -42,15 +28,15 @@ namespace SportArete.Core.Models.Order
         public decimal? TotalPrice { get; set; }
 
         [Description("Date of order.")]
-        public DateTime? OrderDate { get; set; }
+        public DateTime OrderDate { get; set; }
 
         [Description("List of product Ids that are in the order.")]
         public List<int> ProductIds { get; set; } = new List<int>();
 
         [Description("Id of the user that made the order.")]
-        public string? UserId { get; set; } = null!;
+        public string? UserId { get; set; }
 
         [Description("Flag indicating whether the order is complete. Default value is false.")]
-        public bool IsComplete { get; set; } = false;
+        public bool IsComplete { get; set; }
     }
 }

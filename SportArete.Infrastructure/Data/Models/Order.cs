@@ -46,7 +46,7 @@ namespace SportArete.Infrastructure.Data.Models
         [Description("Id of the user that made the order.")]
         public string UserId { get; set; } = null!;
 
-        [Description("Flag indicating whether the order is complete")]
+        [Description("Flag indicating whether the order is complete. Default value is false.")]
         public bool IsComplete { get; set; } = false;
     }
 }
