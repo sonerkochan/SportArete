@@ -5,6 +5,9 @@ using static Humanizer.In;
 
 namespace SportArete.Areas.Admin.Controllers
 {
+    /// <summary>
+    /// The Admin controller responsible for order management.
+    /// </summary>
     public class OrderController : BaseController
     {
         private readonly IOrderService orderService;
@@ -13,6 +16,10 @@ namespace SportArete.Areas.Admin.Controllers
         {
             orderService = _orderService;
         }
+
+        /// <summary>
+        /// Shows all orders on the website.
+        /// </summary>
         public async Task<IActionResult> All()
         {
             var model = await orderService.All();

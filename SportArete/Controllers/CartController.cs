@@ -12,6 +12,9 @@ using System.Security.Claims;
 
 namespace SportArete.Controllers
 {
+    /// <summary>
+    /// The controller is responsible for cart management.
+    /// </summary>
     [Authorize]
     public class CartController : Controller
     {
@@ -33,6 +36,11 @@ namespace SportArete.Controllers
             userManager = _userManager;
         }
 
+        /// <summary>
+        /// Method for adding a product to the cart.
+        /// </summary>
+        /// <param name="productId">Product's id.</param>
+        /// <returns>Adds a product to the user's cart.</returns>
         [HttpPost]
         public async Task<IActionResult> Add(int productId)
         {
@@ -56,6 +64,10 @@ namespace SportArete.Controllers
             return RedirectToAction(nameof(MyCart));
         }
 
+        /// <summary>
+        /// Opens the user's cart.
+        /// </summary>
+        /// <returns>Page of the user's cart.</returns>
         [HttpGet]
         public async Task<IActionResult> MyCart()
         {
@@ -70,6 +82,11 @@ namespace SportArete.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Removes a given product from the cart.
+        /// </summary>
+        /// <param name="productId">Product's id</param>
+        /// <returns>Removes a selected product from the cart.</returns>
         [HttpPost]
         public async Task<IActionResult> Remove(int productId)
         {

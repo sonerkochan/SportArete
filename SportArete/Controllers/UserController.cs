@@ -6,6 +6,9 @@ using SportArete.Core.Models.User;
 
 namespace SportArete.Controllers
 {
+    /// <summary>
+    /// The controller is responsible for user management.
+    /// </summary>
     [Authorize]
     public class UserController : Controller
     {
@@ -15,6 +18,9 @@ namespace SportArete.Controllers
 
         private readonly RoleManager<IdentityRole> roleManager;
 
+        /// <summary>
+        /// Constructor for the user controller.
+        /// </summary>
         public UserController(
             UserManager<User> _userManager,
             SignInManager<User> _signInManager,
@@ -25,6 +31,10 @@ namespace SportArete.Controllers
             roleManager = _roleManager;
         }
 
+        /// <summary>
+        /// The register method for the controller.
+        /// </summary>
+        /// <returns>An empty 'RegisterViewModel'.</returns>
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register()
@@ -39,6 +49,11 @@ namespace SportArete.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// The register method for the controller.
+        /// </summary>
+        /// <param name="model">'RegisterViewModel' filled with data in the registration form.</param>
+        /// <returns>Registers the user in the system if everything is okay.</returns>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel model)
@@ -69,6 +84,9 @@ namespace SportArete.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// The login action for the controller.
+        /// </summary>
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login()
@@ -83,6 +101,10 @@ namespace SportArete.Controllers
             return View(model);
         }
 
+
+        /// <summary>
+        /// The login action for the controller.
+        /// </summary>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -115,6 +137,10 @@ namespace SportArete.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// The log out method of the controller.
+        /// </summary>
+        /// <returns>Returns the user to the index page.</returns>
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();

@@ -7,6 +7,9 @@ using SportArete.Core.Models.Product;
 
 namespace SportArete.Controllers
 {
+    /// <summary>
+    /// The controller is responsible for brand management.
+    /// </summary>
     [Authorize]
     public class BrandController : Controller
     {
@@ -21,6 +24,10 @@ namespace SportArete.Controllers
             brandService = _brandService;
         }
 
+        /// <summary>
+        /// Shows all available brands.
+        /// </summary>
+        /// <returns>Page with all brands.</returns>
         [AllowAnonymous]
         public async Task <IActionResult> Index()
         {

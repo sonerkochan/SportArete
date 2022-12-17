@@ -7,6 +7,9 @@ using static SportArete.Areas.Admin.Constants.AdminConstants;
 
 namespace SportArete.Controllers
 {
+    /// <summary>
+    /// The controller is responsible for user management.
+    /// </summary>
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -21,6 +24,10 @@ namespace SportArete.Controllers
             productService = _productService;
         }
 
+        /// <summary>
+        /// Index page of the site. Top products are displayed here.
+        /// </summary>
+        /// <returns>Index page of the website.</returns>
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -33,10 +40,6 @@ namespace SportArete.Controllers
             return View(model);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

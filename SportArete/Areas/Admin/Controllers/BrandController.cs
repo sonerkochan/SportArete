@@ -6,6 +6,9 @@ using SportArete.Core.Services;
 
 namespace SportArete.Areas.Admin.Controllers
 {
+    /// <summary>
+    /// The Admin controller responsible for brand management.
+    /// </summary>
     public class BrandController : BaseController
     {
         private readonly IBrandService brandService;
@@ -16,6 +19,10 @@ namespace SportArete.Areas.Admin.Controllers
             brandService = _brandService;
         }
 
+        /// <summary>
+        /// Method to add a new brand to the website.
+        /// </summary>
+        /// <returns>A form to fill with data of the new brand.</returns>
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -24,6 +31,9 @@ namespace SportArete.Areas.Admin.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Validates the data of the newly added brand before adding it to the database.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Add(AddBrandViewModel addBrandViewModel)
         {

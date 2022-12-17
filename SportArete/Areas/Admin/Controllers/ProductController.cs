@@ -5,6 +5,9 @@ using SportArete.Core.Models.Product;
 
 namespace SportArete.Areas.Admin.Controllers
 {
+    /// <summary>
+    /// The Admin controller responsible for product management.
+    /// </summary>
     public class ProductController : BaseController
     {
         private readonly IProductService productService;
@@ -14,7 +17,9 @@ namespace SportArete.Areas.Admin.Controllers
             productService = _productService;
         }
 
-
+        /// <summary>
+        /// Shows all available products on the website.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> AllAvailable()
         {
@@ -23,6 +28,10 @@ namespace SportArete.Areas.Admin.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Method to remove a given products from the website.
+        /// </summary>
+        /// <param name="id">Product's Id.</param>
         [HttpPost]
         public async Task<IActionResult> RemoveProduct(int id)
         {
@@ -31,7 +40,10 @@ namespace SportArete.Areas.Admin.Controllers
             return RedirectToAction(nameof(AllAvailable));
         }
 
-
+        /// <summary>
+        /// Method to add a new product to the website.
+        /// </summary>
+        /// <returns>A form to fill with data of the new product.</returns>
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -44,6 +56,9 @@ namespace SportArete.Areas.Admin.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Validates the data of the newly added product before adding it to the database.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Add(AddProductViewModel addProductViewModel)
         {

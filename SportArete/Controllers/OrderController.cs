@@ -11,6 +11,9 @@ using System.Security.Claims;
 
 namespace SportArete.Controllers
 {
+    /// <summary>
+    /// The controller is responsible for order management.
+    /// </summary>
     [Authorize]
     public class OrderController : Controller
     {
@@ -33,6 +36,10 @@ namespace SportArete.Controllers
             userManager = _userManager;
             cartService = _cartService;
         }
+
+        /// <summary>
+        /// Creates a new order which will be filled with user's delivery information.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -50,6 +57,9 @@ namespace SportArete.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// The user fills his delivery information and sends it to the database.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Create(AddOrderViewModel addOrderViewModel)
         {
@@ -74,6 +84,9 @@ namespace SportArete.Controllers
 
         }
 
+        /// <summary>
+        /// Page with all orders of a given user.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Mine()
         {
@@ -83,6 +96,11 @@ namespace SportArete.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Method to confirm that a given order was delivered.
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Confirm(int orderId)
         {
