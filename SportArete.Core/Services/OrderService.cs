@@ -9,6 +9,9 @@ using System.Security.Claims;
 
 namespace SportArete.Core.Services
 {
+    /// <summary>
+    /// This Service is responsible for dealing with action relating the orders.
+    /// </summary>
     public class OrderService : IOrderService
     {
 

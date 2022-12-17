@@ -8,6 +8,9 @@ using System.ComponentModel;
 
 namespace SportArete.Core.Services
 {
+    /// <summary>
+    /// This Service is responsible for dealing with action relating the users.
+    /// </summary>
     public class UserService : IUserService
     {
         private readonly IRepository repo;

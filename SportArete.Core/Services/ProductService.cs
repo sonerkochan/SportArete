@@ -9,6 +9,9 @@ using System.Net;
 
 namespace SportArete.Core.Services
 {
+    /// <summary>
+    /// This Service is responsible for dealing with action relating the products.
+    /// </summary>
     public class ProductService : IProductService
     {
         private readonly IRepository repo;

@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace SportArete.Core.Services
 {
+    /// <summary>
+    /// This Service is responsible for dealing with action relating the reviews.
+    /// </summary>
     public class ReviewService:IReviewService
     {
 

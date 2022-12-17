@@ -3,6 +3,9 @@ using SportArete.Infrastructure.Data.Models;
 
 namespace SportArete.Core.Contracts
 {
+    /// <summary>
+    /// The interface for the ProductService    .
+    /// </summary>
     public interface IProductService
     {
         Task<IEnumerable<Category>> GetCategoriesAsync();

@@ -10,6 +10,9 @@ using System.ComponentModel;
 
 namespace SportArete.Core.Services
 {
+    /// <summary>
+    /// This Service is responsible for dealing with action relating the carts.
+    /// </summary>
     public class CartService : ICartService
     {
         private readonly IRepository repo;

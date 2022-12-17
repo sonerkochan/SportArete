@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace SportArete.Core.Models.User
 {
@@ -8,10 +9,12 @@ namespace SportArete.Core.Models.User
     public class LoginViewModel
     {
         [Required]
+        [Description("User's Username.")]
         public string UserName { get; set; } = null!;
 
         [Required]
         [DataType(DataType.Password)]
+        [Description("User's Password.")]
         public string Password { get; set; } = null!;
     }
 }

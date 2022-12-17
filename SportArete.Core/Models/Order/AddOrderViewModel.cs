@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace SportArete.Core.Models.Order
 {
+    /// <summary>
+    /// View model for adding a new order
+    /// </summary>
     public class AddOrderViewModel
     {
         public int Id { get; set; }

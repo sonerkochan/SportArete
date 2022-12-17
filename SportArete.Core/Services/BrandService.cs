@@ -6,6 +6,9 @@ using System.ComponentModel;
 
 namespace SportArete.Core.Services
 {
+    /// <summary>
+    /// This Service is responsible for dealing with action relating the brands.
+    /// </summary>
     public class BrandService : IBrandService
     {
 
