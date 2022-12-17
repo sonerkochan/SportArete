@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<OrderViewModel>
 
 @{
-    ViewBag.Title = "All Orders";
+    ViewBag.Title = "My Orders";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -17,6 +17,7 @@
             <th><label>Total Price</label></th>
             <th><label>Date of order</label></th>
             <th><label>Status</label></th>
+            <th><label>Actions</label></th>
         </tr>
     </thead>
     <tbody>
@@ -36,7 +37,11 @@
                     }
                     else
                     {
-                        <label class="text-center">❌</label>
+                        <td>
+                            <form asp-area="" asp-controller="Order" asp-action="Confirm" asp-route-orderId="@order.Id" method="post">
+                                <button type="submit" class="btn btn-success">Confirm received</button>
+                            </form>
+                        </td>
                     }
                 </td>
             </tr>

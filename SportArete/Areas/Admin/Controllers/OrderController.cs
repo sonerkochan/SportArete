@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SportArete.Core.Contracts;
 using SportArete.Core.Services;
+using static Humanizer.In;
 
 namespace SportArete.Areas.Admin.Controllers
 {

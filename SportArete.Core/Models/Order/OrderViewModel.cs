@@ -37,6 +37,6 @@ namespace SportArete.Core.Models.Order
         public string? UserId { get; set; }
 
         [Description("Flag indicating whether the order is complete. Default value is false.")]
-        public bool IsComplete { get; set; }
+        public bool? IsComplete { get; set; }
     }
 }

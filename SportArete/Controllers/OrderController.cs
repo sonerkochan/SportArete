@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SportArete.Core.Contracts;
 using SportArete.Core.Data;
 using SportArete.Core.Models.Order;
+using SportArete.Core.Services;
 using SportArete.Infrastructure.Data.Common;
 using SportArete.Infrastructure.Data.Models;
 using System.Security.Claims;
@@ -83,6 +84,23 @@ namespace SportArete.Controllers
         public async Task<IActionResult> Payment()
         {
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Mine()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var model = await orderService.Mine(userId);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Confirm(int orderId)
+        {
+            bool result = await orderService.Confirm(orderId);
+
+            return RedirectToAction(nameof(Mine));
         }
     }
 }

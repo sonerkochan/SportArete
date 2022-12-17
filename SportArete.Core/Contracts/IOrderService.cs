@@ -37,9 +37,25 @@ namespace SportArete.Core.Contracts
         /// <returns>Task</returns>
         Task AddOrderAsync(AddOrderViewModel model, string userId);
 
+        /// <summary>
+        /// Returns a list of all orders. Accessed by an admin.
+        /// </summary>
+        /// <returns>List of all orders.</returns>
         Task<IEnumerable<OrderViewModel>> All();
 
+        /// <summary>
+        /// Returns a list of orders made by an user.
+        /// </summary>
+        /// <param name="userId">User's Id.</param>
+        /// <returns>List of orders of an user.</returns>
         Task<IEnumerable<OrderViewModel>> Mine(string userId);
+
+        /// <summary>
+        /// Confirms an order as received.
+        /// </summary>
+        /// <param name="orderId">Order's Id.</param>
+        /// <returns>A flag indicating whether the operation was successful.</returns>
+        Task<bool> Confirm(int orderId);
 
     }
 }

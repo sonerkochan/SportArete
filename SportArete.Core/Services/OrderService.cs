@@ -55,7 +55,7 @@ namespace SportArete.Core.Services
         public List<int> GetAllProductIds(string userId)
         {
             List<int> productIds = new List<int>();
-            
+
             Cart cart = repo.All<Cart>()
                 .FirstOrDefault(c => c.UserId == userId);
 
@@ -65,7 +65,7 @@ namespace SportArete.Core.Services
             {
                 productIds.Add(product.ProductId);
             }
-            
+
 
             return productIds;
         }
@@ -92,7 +92,7 @@ namespace SportArete.Core.Services
                 TotalPrice = totalPrice,
                 OrderDate = DateTime.Today,
                 UserId = userId,
-                IsComplete = true
+                IsComplete = false
             };
 
             await repo.AddAsync(entity);
@@ -160,6 +160,18 @@ namespace SportArete.Core.Services
                 .ToListAsync();
 
             return result;
+        }
+
+
+        public async Task<bool> Confirm(int orderId)
+        {
+            var order = await repo.All<Order>().FirstOrDefaultAsync(o => o.Id == orderId);
+
+            order.IsComplete = true;
+
+            await repo.SaveChangesAsync();
+
+            return true;
         }
     }
 }
