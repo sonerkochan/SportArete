@@ -1,11 +1,18 @@
 ﻿@model IEnumerable<ProductViewModel>
 
 @{
-    ViewData["Title"] = "Your Cart";
+    ViewData["Title"] = "My Cart";
 }
 
+
+<head>
+    <title>My Cart</title>
+    <link href="~/css/styling.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
 <div class="text-center">
-    <h1 class="display-4">Sport Arete</h1>
+    <h1 class="display-4">My Cart</h1>
 </div>
 
 <div class="d-flex justify-content-center">
@@ -13,33 +20,38 @@
     {
         <h1>Cart empty</h1>
     }
-    @foreach (var product in Model)
-    {
-        <div class="card col-4" style="width: 20rem; ">
+    <div class="box">
+        @foreach (var product in Model)
+        {
+            <div class="card col-4" style="width: 20rem; ">
 
-            <img class="card-img-top" style="width: auto; height: 250px;"
-             src="@product.ImageData" alt="Product Image">
+                <img class="card-img-top" style="width: auto; height: 250px;"
+                 src="@product.ImageData" alt="Product Image">
 
-            <div class="card-body">
+                <div class="card-body">
 
-                <h5 class="card-title mt-1">@product.Brand @product.Model</h5>
-                <p class="mb-0">Price: @product.Price BGN</p>
+                    <h5 class="card-title mt-1">@product.Brand @product.Model</h5>
+                    <p class="mb-0">Price: @product.Price BGN</p>
+                </div>
+                <form asp-controller="Cart" asp-action="Remove" asp-route-productId="@product.Id" method="post">
+                    <input class="btn btn-primary" type="submit" value="Remove" />
+                </form>
             </div>
-            <form asp-controller="Cart" asp-action="Remove" asp-route-productId="@product.Id" method="post">
-                <input class="btn btn-primary" type="submit" value="Remove" />
-            </form>
-        </div>
-    }
-    @if(Model.Count()!=0)
-    {
-        <h1>
-            Total Price: @Model.Sum(m=>m.Price) BGN.
-        </h1>
+        }
+    </div>
+     <div id="content">
+        @if(Model.Count()!=0)
+        {
+            <h1>
+                Total Price: @Model.Sum(m=>m.Price) BGN.
+            </h1>
 
-        <div>
-            <form asp-controller="Order" asp-action="Create" method="get">
-                <input class="btn btn-primary" type="submit" value="Delivery" />
-            </form>
-        </div>
-    }
+
+            <button type="button" class="button" style="border:1px solid black; margin-right: 10px">
+                <div>
+                    <a class="nav-link text-dark" asp-controller="Order" asp-action="Create" method="get">Delivery</a>
+                </div>
+            </button>
+        }
+    </div>
 </div>
