@@ -5,22 +5,9 @@
 }
 
 
+<p class="topProducts" style="top: 43px;">@ViewBag.Title</p>
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
-
-@*
-
-                FullName = model.FullName,
-                Phone = model.Phone,
-                Address = model.Address,
-                PostalCode = model.PostalCode,
-                TotalPrice = model.TotalPrice,
-                OrderDate = model.OrderDate,
-                UserId = model.UserId,
-                IsComplete = true
-*@
-
+<div class="white-box">
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form asp-action="Create" method="post">
@@ -50,7 +37,7 @@
         </form>
     </div>
 </div>
-
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

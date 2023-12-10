@@ -6,23 +6,24 @@
 
 
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<p class="topProducts" style="top: 43px;">
+    @ViewBag.Title</p>
 <hr />
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form asp-action="Add" method="post">
-            <div class="mb-3">
+            <div class="mb-3" style="color: whitesmoke; margin-bottom:10px">
                 <label asp-for="@Model.Name" class="form-label">Brand Name</label>
                 <input asp-for="@Model.Name" class="form-control" aria-required="true" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" style="color: whitesmoke; margin-bottom:10px">
                 <label asp-for="@Model.Description" class="form-label">Description</label>
                 <textarea asp-for="@Model.Description" class="form-control" aria-required="true" rows="5"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" style="color: whitesmoke; margin-bottom:10px">
                 <input class="btn btn-primary" type="submit" value="Add" />
             </div>
         </form>

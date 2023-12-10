@@ -4,29 +4,31 @@
     ViewBag.Title = "All Users";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th><label>UserName</label></th>
-            <th><label>Email</label></th>
-            <th><label>Actions</label></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
-            <tr>
-                <td><label>@user.UserName</label></td>
-                <td><label>@user.Email</label></td>
-                <td>
-                        <form asp-area="Admin" asp-controller="User" asp-action="Forget" asp-route-userId="@user.UserId"  method="post">
-                            <button type="submit" class="btn btn-danger">Forget</button>
-                        </form>
-                </td>
+<p class="topProducts" style="top: 43px;">ALL USERS</P>
+
+    <div class="white-box">
+    <table class="custom-table">
+        <thead>
+            <tr class="table-header">
+                <th><label class="custom-label">UserName</label></th>
+                <th><label class="custom-label">Email</label></th>
+                <th><label class="custom-label">Actions</label></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr class="table-row">
+                    <td><label>@user.UserName</label></td>
+                    <td><label>@user.Email</label></td>
+                    <td>
+                        <form asp-area="Admin" asp-controller="User" asp-action="Forget" asp-route-userId="@user.UserId" method="post">
+                            <button type="submit" class="custom-button">Forget</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>

@@ -4,22 +4,55 @@
 @{
     ViewData["Title"] = "Categories";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Sport Arete</h1>
-</div>
-
-<div class="text-center">
-    <h2 class="display-4">@ViewBag.Title</h2>
-</div>
-
+<p class="topProducts" style="top: 43px;">CATEGORIES</p>
+                                    
 <div class="d-flex justify-content-center">
     @foreach (var category in Model)
     {
-            <div id="divActivites" style="border:1px solid black; margin-right: 10px">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Category" asp-route-categoryId="@category.Id" >
-                <h1>@category.Name</h1>
-                </a>
+        <div class="container page-wrapper">
+            <div class="page-inner">
+                <div class="row">
+                    <div class="el-wrapper">
+                        <div class="box-up">
+                            @if (category.Name == "Clothing")
+                            {
+                                <img class="img" src="/images/image-t-shirt.png" alt="Product Image">
+                            }
+                            @if (category.Name == "Shoes")
+                            {
+                                <img class="img" src="/images/Shoes.png" alt="Product Image">
+                            }
+                            @if (category.Name == "Fitness")
+                            {
+                                <img class="img" src="/images/fitness.png" alt="Product Image">
+                            }
+                            @if (category.Name == "Accessories")
+                            {
+                                <img class="img" src="/images/grivna.png" alt="Product Image">
+                            }
+
+                            <div class="img-info">
+                                <div class="info-inner">
+                                    <span class="p-name" style="font-variant-caps: all-petite-caps;letter-spacing: 1px;font-family: fantasy;font-size: 32px;">@category.Name</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box-down">
+                            <div class="h-bg">
+                                <div class="h-bg-inner"></div>
+                            </div>
+
+                            <a class="cart" asp-area="" asp-controller="Product" asp-action="Category" asp-route-categoryId="@category.Id">
+                              
+                                <span class="add-to-cart">
+                                    <span class="txt">View</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
     }
 </div>

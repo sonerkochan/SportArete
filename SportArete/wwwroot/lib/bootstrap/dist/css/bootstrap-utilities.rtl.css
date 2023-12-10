@@ -1250,7 +1250,8 @@
 }
 
 .text-center {
-  text-align: center !important;
+    margin-block: 25px;
+    text-align: center !important;
 }
 
 .text-decoration-none {

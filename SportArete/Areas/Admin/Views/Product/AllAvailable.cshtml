@@ -7,40 +7,63 @@
 
 <html>
 
-    <head>
-        <title>Admin Menu</title>
-        <link href="~/css/styling.css" rel="stylesheet" type="text/css" />
-    </head>
+<head>
+    <title>Admin Menu</title>
+    <link href="~/css/styling.css" rel="stylesheet" type="text/css" />
+</head>
 
-    <body>
-        <div class="text-center">
-            <h1 class="display-4">Admin Menu</h1>
-        </div>
+<body>
 
-        <div class="text-center">
-            <h2 class="display-4">All Available Products</h2>
-        </div>
+    <p class="topProducts" style="top: 43px;">ALL PRODUCTS</p>
 
-        <div class="box">
+    <div class="d-flex justify-content-center">
         @foreach (var product in Model.OrderBy(x => x.Model))
         {
-                    <div class="card col-4" style="width: 20rem; ">
+            <div class="container page-wrapper">
+                <div class="page-inner">
+                    <div class="row">
+                        <div class="el-wrapper">
+                            <div class="box-up">
+                                <img class="img" src="@product.ImageData" alt="Product Image">
+                                <div class="img-info">
+                                    <div class="info-inner">
+                                        <span class="p-name">@product.Brand @product.Model</span>
+                                    </div>
+                                    @if (product.Category == "Clothing")
+                                    {
+                                        <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+                                    }
+                                    @if (product.Category == "Shoes")
+                                    {
+                                        <div class="a-size">Available sizes : <span class="size">36 , 37 , 38 , 43</span></div>
+                                    }
+                                </div>
+                            </div>
 
-                        <img class="card-img-top" style="width: auto; height: 250px;"
-                     src="@product.ImageData" alt="Product Image">
+                            <div class="box-down">
+                                <div class="h-bg">
+                                    <div class="h-bg-inner"></div>
+                                </div>
 
-                        <div class="card-body">
+                                <div class="cart">
+                                    <span class="price">@product.Price BGN</span>
+                                    <span class="add-to-cart">
+                                        <form asp-area="Admin" asp-controller="Product" asp-action="RemoveProduct" asp-route-Id="@product.Id" method="post">
+                                            <span class="txt">
+                                                <button class="txt" type="submit" value="Remove product" style="background: transparent;height: 100px;width: 300px;border: none;color: white;">
+                                                    Delete
+                                                </button>
+                                            </span>
+                                        </form>
+                                    </span>
 
-                            <h5 class="card-title mt-1">@product.Brand @product.Model</h5>
-                            <p class="mb-0">Price: @product.Price BGN</p>
+                                </div>
+                            </div>
                         </div>
-                            <form asp-area="Admin" asp-controller="Product" asp-action="RemoveProduct" asp-route-Id="@product.Id" method="post">
-
-                                <input class="btn btn-primary" type="submit" value="Remove product"/>
-
-                            </form>
                     </div>
+                </div>
+            </div>
         }
-        </div>
-    </body>
+    </div>
+</body>
 </html>
