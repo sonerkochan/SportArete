@@ -1,0 +1,53 @@
+﻿
+<html>
+
+<head>
+    <title>Admin Menu</title>
+    <link href="~/css/styling.css" rel="stylesheet" type="text/css" />
+</head>
+
+
+<body>
+    <div class="mt-4 p-5 bg-light text-center">
+        <h2 class="display-4">Hello, Admin!</h2>
+    <p class="lead mb-1 mt-3">
+        This is your administrator area - you can <b>Add</b> and <b>remove</b> products
+        <br />You can <b>add</b> and new brands too.
+    </p>
+    <p class="lead mt-1">
+        You can also see <b>all users</b> and <b>all products</b> in the system.
+    </p>
+    <hr class="my-4">
+
+        <button type="button" class="button" style="background: lightgray;border:1px solid black;margin-right: 10px">
+            <div>
+                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="Add">Add a new product</a>
+            </div>
+        </button>
+        <button type="button" class="button" style="background: lightgray;border:1px solid black;margin-right: 10px">
+            <div>
+                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Brand" asp-action="Add">Add a new brand</a>
+            </div>
+        </button>
+        <button type="button" class="button" style="background: lightgray;border:1px solid black;margin-right: 10px">
+            <div>
+                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="AllAvailable">Check available products</a>
+            </div>
+        </button>
+
+        <button type="button" class="button" style="background: lightgray;border:1px solid black;margin-right: 10px">
+            <div>
+                <a class="nav-link text-dark" asp-area="Admin" asp-controller="User" asp-action="All">See all users</a>
+            </div>
+        </button>
+        
+        <button type="button" class="button" style="background: lightgray;border:1px solid black;margin-right: 10px">
+            <div>
+                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="All">See all orders</a>
+            </div>
+        </button>
+    </div>
+</body>
+
+
+</html>

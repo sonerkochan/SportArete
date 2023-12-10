@@ -1,0 +1,65 @@
+﻿
+@model IEnumerable<Brand>
+
+@{
+    ViewData["Title"] = "Brands";
+}
+
+<style>
+    .d-flex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    #divActivites {
+        box-shadow: 0 10px 35px rgb(0 0 0);
+        width: max-content;
+        box-sizing: border-box;
+        width: 245px;
+        padding: 20px;
+        margin: 25px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9cf;
+        text-align: center;
+        color: #333;
+        transition: background-color 0.3s cubic-bezier(0.71, -0.52, 0.12, 1.13);
+    }
+
+        #divActivites:hover {
+            background-color: #ffffff;
+        }
+
+    h1 {
+        color: #fff;
+        background-color: #282828;
+        padding: 5px;
+        margin-bottom: 10px;
+        border-radius: 3px;
+    }
+
+    p1 {
+        color: #333; /* Text color for description */
+    }
+
+    a {
+        text-decoration: none;
+    }
+</style>
+
+
+<p class="topProducts" style="top: 45px;">BRANDS</p>
+
+
+<div class="d-flex justify-content-center">
+    @foreach (var brand in Model)
+    {
+        <div id="divActivites">
+            <a asp-area="" asp-controller="Product" asp-action="Brand" asp-route-brandId="@brand.Id" >
+                    <h1>@brand.Name</h1>
+                    <p1>@brand.Description</p1>
+            </a>
+        </div>
+    }
+</div>
