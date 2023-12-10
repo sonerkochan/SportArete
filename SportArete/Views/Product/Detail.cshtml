@@ -4,98 +4,124 @@
     ViewBag.Title = Model.Brand + " " + Model.Model;
 }
 
+<!DOCTYPE html>
+<html lang="en">
 
-<html>
-
-    <head>
-        <title>Sport Arete</title>
-        <link href="~/css/styling.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
-
-    <body>
-
-        <h2 class="text-center">@ViewBag.Title</h2>
-        <hr />
-
-        <div class="d-flex justify-content-center">
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                            <img class="card-img-top" style="width: auto; height: 250px;"
-                             src="@Model.ImageData" alt="Product Image">
-                    </div>
-
-                    <div class="col-12 col-md-6">
-                        <h5 class="card-title mt-1">@Model.Description</h5>
-                        @if (@Model.Category == "Clothing" || Model.Category == "Shoes")
-                        {
-                            <h5 class="card-title mt-1">SIZE: @Model.Size EU</h5>
-                        }
-                        else
-                        {
-                            <h5 class="card-title mt-1">SIZE: @Model.Size</h5>
-                        }
-                        <h5 class="card-title mt-1">PRICE: @Model.Price BGN</h5>
-                    </div>
-
-                        <form asp-controller="Cart" asp-action="Add" asp-route-productId="@Model.Id" method="post">
-                           
-                            <input class="btn btn-primary" type="submit" value="Add To Cart"/>
-                          
-                        </form>
-                </div>
-        </div>
-
-        <div class="rating">
-            @if (Model.Reviews.Count() != 0)
-            {
-
-                @foreach(var review in Model.Reviews)
-                {
-                <div class="reviewBox">
-
-                    <h2>Star Rating</h2>
-                    @for(int i=review.Rating;i>0;i--)
-                    {
-                        <span class="fa fa-star checked"></span>
-                    }
-                    @for (int i = review.Rating; i < 5; i++)
-                    {
-                        <span class="fa fa-star"></span>
-                    }
-
-                    <p>@review.Comment</p>
-                    <p>Review by: @review.UserName</p>
-                </div>
-            }
-            @if(!Model.Reviews.Any(x=>x.UserName==User.Identity.Name))
-            {
-                <button type="button" class="button" style="border:1px solid black; margin-right: 10px">
-                    <div>
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="AddReview" asp-route-id="@Model.Id">Review the product</a>
-                    </div>
-                </button>
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <style>
+        centered {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        else
-        {
-            <p>There are no reviews for this product.</p>
-            @if(User.Identity.IsAuthenticated)
-            {
-                <p>Be the first one to add a review!</p>
-                
-            <button type="button" class="button" style="border:1px solid black; margin-right: 10px">
-                <div>
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="AddReview" asp-route-id="@Model.Id">Review the product</a>
-                </div>
-            </button>
-            }
-        }
-        </div>
+    </style>
+</head>
 
-    </body>
+<body>
+    <div class="centered">
+        <div class="d-flex">
+            <div class="containerDetail">
+                <div class="imgBxDetail">
+                    <img class="imgDetail" src="@Model.ImageData" alt="Product Image">
+                </div>
+                <div class="detailsDetail">
+                    <div class="contentDetail">
+                        <h2>
+                            @ViewBag.Title
+                            <br>
+                            <span> @Model.Brand</span>
+                        </h2>
+                        <p>@Model.Description</p>
+
+                        <p class="product-colorsDetail">
+                            Available Sizes:
+                            @if (@Model.Category == "Clothing" || Model.Category == "Shoes")
+                            {
+                                <h5>@Model.Size EU</h5>
+                            }
+                            else
+                            {
+                                <h5>@Model.Size</h5>
+                            }
+                        </p>
+
+                        <h3>
+                            @Model.Price BGN
+                        </h3>
+
+                        <div class="product-colors">
+                            <form asp-controller="Cart" asp-action="Add" asp-route-productId="@Model.Id" method="post">
+                                <button>Add To Cart</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="reviewBox">
+                <div class="container1StarRating">
+                    <h2StarRating>Star Reviews</h2StarRating>
+                    <div class="descriptionStarRating">
+                        <p>Star review section. Check out the reviews below.</p>
+                    </div>
+
+                    @if (Model.Reviews.Count() != 0)
+                    {
+                        @foreach (var review in Model.Reviews)
+                        {
+
+                            <div class="reviewSectionStarRating">
+
+                                <div class="reviewItemStarRating">
+                                    <div class="topStarRating">
+                                        <h3>@review.UserName</h3>
+                                        <ul>
+                                            @for (int i = review.Rating; i > 0; i--)
+                                            {
+                                                <li>★</li>
+                                            }
+                                            @for (int i = review.Rating; i < 5; i++)
+                                            {
+                                                <li>☆</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <articleStarRating>
+                                        <p>@review.Comment</p>
+                                    </articleStarRating>
+                                </div>
+                            </div>
+
+                        }
+                        @if (!Model.Reviews.Any(x => x.UserName == User.Identity.Name))
+                        {
+                            @* <div class="product-colors"><form asp-controller="Cart" asp-action="Add" asp-route-productId="@Model.Id" method="post"><button>Add To Cart</button></form></div>*@
+                            @* <div class="product-colors"> <a asp-area="" asp-controller="Product" asp-action="AddReview" asp-route-id="@Model.Id"> <button>Add To Cart</button></a></div>*@
+                        }
+                    }
+                    else
+                    {
+                        <p>There are no reviews for this product.</p>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <p>Be the first one to add a review!</p>
+
+                        }
+                    }
+
+                    <a asp-area="" asp-controller="Product" asp-action="AddReview" asp-route-id="@Model.Id">
+                        <button class="button1">Review the product</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

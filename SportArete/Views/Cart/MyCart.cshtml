@@ -4,54 +4,319 @@
     ViewData["Title"] = "My Cart";
 }
 
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>My Cart</title>
     <link href="~/css/styling.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+      .CartContainer {
+    position: fixed;
+    height: auto;
+    contain: paint;
+    width: 700px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0px 10px 20px #1687d933;
+}
+        .Header {
+            margin-left: 40px;
+            /* margin: auto; */
+            width: 200px;
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .Heading {
+            font-size: 20px;
+            font-family: 'Open Sans';
+            font-weight: 700;
+            color: #2F3841;
+        }
+
+        .Action {
+            font-size: 14px;
+            font-family: 'Open Sans';
+            font-weight: 600;
+            color: #E44C4C;
+            cursor: pointer;
+            border-bottom: 1px solid #E44C4C;
+        }
+
+        .Cart-Items {
+            position: relative;
+            margin: auto;
+            width: 90%;
+            height: 30%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            align-content: center;
+        }
+
+        .image-box {
+            width: 15%;
+            text-align: center;
+        }
+
+        .about {
+            width: 80%;
+            padding-left: 20px;
+        }
+
+        .title {
+            margin-bottom: 10px;
+            margin-block: 25px;
+            padding-top: 10px;
+            line-height: 10px;
+            font-size: 25px;
+            font-family: 'Open Sans';
+            font-weight: 700;
+            color: #202020;
+        }
+
+        .subtitle {
+            line-height: 10px;
+            font-size: 18px;
+            font-family: 'Open Sans';
+            font-weight: 600;
+            color: #909090;
+        }
+
+        .subtitle1 {
+            margin: 24px 38px;
+            line-height: 10px;
+            font-size: 18px;
+            font-family: 'Open Sans';
+            font-weight: 600;
+            color: #909090;
+        }
+        .counter {
+            width: 15%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #d9d9d9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-family: 'Open Sans';
+            font-weight: 900;
+            color: #202020;
+            cursor: pointer;
+        }
+
+        .count {
+            font-size: 20px;
+            font-family: 'Open Sans';
+            font-weight: 600;
+            color: #202020;
+        }
+
+        .prices {
+            width: auto;
+            text-align: right;
+        }
+
+        .amount {
+            width: 200px;
+            padding-top: 20px;
+            font-size: 26px;
+            font-family: 'Open Sans';
+            font-weight: 400;
+            color: #202020;
+        }
+
+        .save {
+            padding-top: 5px;
+            font-size: 14px;
+            font-family: 'Open Sans';
+            font-weight: 600;
+            color: #1687d9;
+            cursor: pointer;
+        }
+
+        .remove {
+            background: white;
+            margin-top: 10px;
+            padding-top: auto;
+            font-size: 14px;
+            font-family: 'Open Sans';
+            font-weight: 600;
+            color: #ff0018;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Add your desired shadow values here */
+        }
+
+        .pad {
+            margin-top: 5px;
+        }
+
+        hr {
+            width: 66%;
+            float: right;
+            margin-right: 5%;
+        }
+
+        .checkout {
+            padding: 20px 20px 20px 20px;
+            align-self: center;
+            margin-bottom: 40px;
+            /* float: inline-end; */
+            /* margin-right: -5%; */
+            width: 97%;
+            position: relative;
+            left: 10px;
+            /* right: 10px; */
+        }
+
+
+        .total {
+            font-weight: 300;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .Subtotal {
+            margin-inline: 10px;
+            width: max-content;
+            font-size: 19px;
+            font-family: 'Open Sans';
+            font-weight: 300;
+            color: #202020;
+        }
+
+        .items {
+            margin-bottom: 15px;
+            margin-inline: 10px;
+            font-size: 16px;
+            font-family: 'Open Sans';
+            font-weight: 500;
+            color: #909090;
+            line-height: 10px;
+        }
+        .total-amount {
+            margin-inline: 6px;
+            font-size: 26px;
+            font-family: 'Open Sans';
+            font-weight: 500;
+            color: #202020;
+        }
+
+        .remove {
+            margin-top: 10px;
+            width: 100%;
+            height: 40px;
+            border: none;
+            background: linear-gradient(to bottom right, #B8D7FF, #8EB7EB);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Open Sans';
+            font-weight: 600;
+            color: #202020;
+        }
+
+        .item-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .image-box {
+            width: 15%;
+            text-align: center;
+        }
+
+        .about {
+    width: 80%;
+    padding-left: 20px;
+}
+
+        .prices {
+            width: auto;
+            text-align: right;
+        }
+
+        .button {
+            background-color: #ddd;
+            border: none;
+            color: black;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 16px;
+            background: #ccffff;
+            justify-content: center;
+        }
+
+    </style>
+
 </head>
-
-<div class="text-center">
-    <h1 class="display-4">My Cart</h1>
-</div>
-
-<div class="d-flex justify-content-center">
-    @if (Model.Count() == 0)
-    {
-        <h1>Cart empty</h1>
-    }
-    <div class="box">
-        @foreach (var product in Model)
-        {
-            <div class="card col-4" style="width: 20rem; ">
-
-                <img class="card-img-top" style="width: auto; height: 250px;"
-                 src="@product.ImageData" alt="Product Image">
-
-                <div class="card-body">
-
-                    <h5 class="card-title mt-1">@product.Brand @product.Model</h5>
-                    <p class="mb-0">Price: @product.Price BGN</p>
+<body>
+    <p class="topProducts" style="top: 43px;">SHOPPING CART</p>
+    <div class="centered">
+        <div class="d-flex">
+            <div class="CartContainer">
+                <div class="Header">
+                    <h3 class="Heading">Shopping Cart</h3>
                 </div>
-                <form asp-controller="Cart" asp-action="Remove" asp-route-productId="@product.Id" method="post">
-                    <input class="btn btn-primary" type="submit" value="Remove" />
-                </form>
+                @if (Model.Count() == 0)
+                {
+                    <h3 class="subtitle1">The card is empty</h3>
+                }
+                <div class="Cart-Items">
+                    @foreach (var product in Model)
+                    {
+                        <div class="item-container">
+                            <div class="image-box">
+                                <img class="card-img-top" src="@product.ImageData" alt="Product Image">
+                            </div>
+                            <div class="about">
+                                <h1 class="title">@product.Model</h1>
+                                <h3 class="subtitle">@product.Brand</h3>
+                            </div>
+                            <div class="prices">
+                                <div class="amount">@product.Price BGN</div>
+                                <form asp-controller="Cart" asp-action="Remove" asp-route-productId="@product.Id" method="post">
+                                    <input class="remove" type="submit" value="Remove" />
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                @if (Model.Count() != 0)
+                {
+                    <hr>
+                    <div class="checkout">
+                        <div class="total">
+                            <div>
+                                <div class="Subtotal">Sub-Total</div>
+                                <div class="items">@Model.Count()</div>
+                            </div>
+                            <div class="total-amount"> Total Price: @Model.Sum(m=>m.Price) BGN.</div>
+                        </div>
+                        <a class="button" asp-controller="Order" asp-action="Create" method="get">Checkout</a>
+                    </div>
+                }
             </div>
-        }
+        </div>
     </div>
-     <div id="content">
-        @if(Model.Count()!=0)
-        {
-            <h1>
-                Total Price: @Model.Sum(m=>m.Price) BGN.
-            </h1>
-
-
-            <button type="button" class="button" style="border:1px solid black; margin-right: 10px">
-                <div>
-                    <a class="nav-link text-dark" asp-controller="Order" asp-action="Create" method="get">Delivery</a>
-                </div>
-            </button>
-        }
-    </div>
-</div>
+</body>
+</html>

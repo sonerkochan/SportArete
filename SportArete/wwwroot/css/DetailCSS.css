@@ -1,0 +1,162 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,800&display=swap');
+
+
+
+.containerDetail {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 900px;
+    height: 600px;
+    background: #212121;
+    margin: 20px;
+}
+
+    .containerDetail .imgBxDetail {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 100%;
+        background: #fff;
+        transition: .3s linear;
+    }
+
+        .containerDetail .imgBxDetail:before {
+            content: 'SportArete';
+            position: absolute;
+            top: 0px;
+            left: 24px;
+            color: #000;
+            opacity: 0.2;
+            font-size: 8em;
+            font-weight: 800;
+        }
+
+        .containerDetail .imgBxDetail:before {
+            content: 'Sport' "\A" 'Arete'; /* "\A" is the escape sequence for a line break */
+            position: absolute;
+            top: 0px;
+            left: 24px;
+            color: #000;
+            opacity: 0.2;
+            font-size: 8em;
+            font-weight: 800;
+            white-space: pre; /* This is important to preserve the line break */
+        }
+
+        .containerDetail .imgBxDetail img {
+            position: relative;
+            width: 400px;
+            transition: .9s linear;
+        }
+
+    .containerDetail .detailsDetail {
+        background: #212121;
+        color:whitesmoke;
+        content: 'Sport' "\A" 'Arete';
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        width: 50%;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 20px;
+    }
+    
+
+    .containerDetail .detailsDetail button {
+        margin-inline:5px;
+        min-width: max-content;
+        height: 60px;
+        width: 155px;
+        background: #000;
+        color: whitesmoke;
+        border: none;
+        outline: none;
+        padding: 15px 20px;
+        margin-top: 5px;
+        font-size: 16px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 600;
+        border-radius: 40px;
+        float: right;
+    }
+
+.product-colorsDetail span {
+    width: 26px;
+    height: 26px;
+    top: 7px;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+
+.product-colorsDetail .activeDetail:after {
+    content: "";
+    width: 36px;
+    height: 36px;
+    border: 2px solid #000;
+    position: absolute;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+/* responsive */
+@media (max-width: 1080px) {
+    .containerDetail {
+        height: auto;
+    }
+
+        .containerDetail .imgBxDetail {
+            padding: 40px;
+            box-sizing: border-box;
+            width: 100% !important;
+            height: auto;
+            text-align: center;
+            overflow: hidden;
+        }
+
+            .containerDetail .imgBxDetail img {
+                left: initial;
+                max-width: 100%;
+                transform: rotate(0deg);
+            }
+
+    .detailsDetail {
+        width: 100% !important;
+        height: auto;
+        padding: 20px;
+    }
+
+    .containerDetail .detailsDetail p {
+        max-width: 85%;
+        /* margin-left: 15%; */
+        color: #a2a2a2;
+        font-size: 15px;
+        margin-bottom: 36px;
+    }
+}
+
+footer {
+    position: fixed;
+    right: 16px;
+    bottom: 12px;
+}
+
+    footer a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 12px;
+    }
+
+
+.containerDetail {
+    display: flex;
+    background-color: #fff; /* Set your desired background color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for a card-like effect */
+}

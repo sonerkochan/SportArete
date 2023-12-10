@@ -148,7 +148,7 @@ h6, .h6 {
 
 p {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 abbr[title],
@@ -168,14 +168,14 @@ address {
 
 ol,
 ul {
-  padding-right: 2rem;
+/*  padding-right: 2rem;*/
 }
 
 ol,
 ul,
 dl {
-  margin-top: 0;
-  margin-bottom: 1rem;
+  /*margin-top: 0;
+  margin-bottom: 1rem;*/
 }
 
 ol ol,
@@ -190,8 +190,8 @@ dt {
 }
 
 dd {
-  margin-bottom: 0.5rem;
-  margin-right: 0;
+/*  margin-bottom: 0.5rem;
+  margin-right: 0;*/
 }
 
 blockquote {
@@ -654,22 +654,25 @@ progress {
   }
 }
 .row {
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(var(--bs-gutter-y) * -1);
-  margin-left: calc(var(--bs-gutter-x) * -.5);
-  margin-right: calc(var(--bs-gutter-x) * -.5);
+    box-shadow: 0 10px 20px rgb(0 0 0);
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) * -.5);
+    margin-left: calc(var(--bs-gutter-x) * -.5);
 }
-.row > * {
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 100%;
-  padding-left: calc(var(--bs-gutter-x) * .5);
-  padding-right: calc(var(--bs-gutter-x) * .5);
-  margin-top: var(--bs-gutter-y);
-}
+
+    .row > * {
+        box-shadow: 0 10px 20px rgb(0 0 0);
+        flex-shrink: 0;
+        width: 100%;
+        max-width: 100%;
+        padding-left: calc(var(--bs-gutter-x) * .5);
+        padding-right: calc(var(--bs-gutter-x) * .5);
+        margin-top: var(--bs-gutter-y);
+    }
 
 .col {
   flex: 1 0 0%;
@@ -3960,13 +3963,15 @@ textarea.form-control-lg {
 }
 
 .navbar {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+    height: 50px;
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    /* padding-top: 0.5rem; */
+    /* padding-bottom: 0.5rem; */
+    flex-direction: row;
 }
 .navbar > .container,
 .navbar > .container-fluid,

@@ -95,7 +95,7 @@ h6 {
 
 p {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 abbr[title],
@@ -113,16 +113,13 @@ address {
   line-height: inherit;
 }
 
-ol,
-ul {
-  padding-left: 2rem;
+ol, ul {
+    /* padding-left: 2rem; */
 }
 
-ol,
-ul,
-dl {
-  margin-top: 0;
-  margin-bottom: 1rem;
+dl, ol, ul {
+    /* margin-top: 0; */
+    /* margin-bottom: 1rem; */
 }
 
 ol ol,

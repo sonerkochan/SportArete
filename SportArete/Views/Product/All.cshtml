@@ -5,40 +5,48 @@
     int i = 0;
 }
 
-<html>
+<p class="topProducts" style="top: 43px;">ALL PRODUCTS</p>
 
-    <head>
-        <title>Sport Arete</title>
-        <link href="~/css/styling.css" rel="stylesheet" type="text/css" />
-    </head>
+<div class="d-flex justify-content-center">
+    @foreach (var product in Model.OrderBy(x => x.Model))
+    {
+        <div class="container page-wrapper">
+            <div class="page-inner">
+                <div class="row">
+                    <div class="el-wrapper">
+                        <div class="box-up">
+                            <img class="img" src="@product.ImageData" alt="Product Image">
+                            <div class="img-info">
+                                <div class="info-inner">
+                                    <span class="p-name">@product.Brand @product.Model</span>
+                                </div>
+                                @if (product.Category == "Clothing")
+                                {
+                                    <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+                                }
+                                @if (product.Category == "Shoes")
+                                {
+                                    <div class="a-size">Available sizes : <span class="size">36 , 37 , 38 , 43</span></div>
+                                }
+                            </div>
+                        </div>
 
-    <body>
-        <div class="text-center">
-            <h1 class="display-4">Sport Arete</h1>
-        </div>
+                        <div class="box-down">
+                            <div class="h-bg">
+                                <div class="h-bg-inner"></div>
+                            </div>
 
-        <div class="text-center">
-            <h2 class="display-4">All Products</h2>
-        </div>
-
-        <div class="box">
-            @foreach (var product in Model.OrderBy(x=>x.Model))
-            {
-                <div class="card col-4" style="width: 20rem; ">
-
-                    <img class="card-img-top" style="width: auto; height: 250px;"
-                     src="@product.ImageData" alt="Product Image">
-
-                    <div class="card-body">
-
-                        <h5 class="card-title mt-1">@product.Brand @product.Model</h5>
-                        <p class="mb-0">Price: @product.Price BGN</p>
+                            <a class="cart" asp-area="" asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id">
+                                <span class="price">@product.Price BGN</span>
+                                <span class="add-to-cart">
+                                    <span class="txt">View</span>
+                                </span>
+                            </a>
+                        </div>
                     </div>
-                    <button>
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id">View</a>
-                    </button>
                 </div>
-            }
+            </div>
         </div>
-    </body>
-</html>
+    }
+</div>
+
