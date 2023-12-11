@@ -45,6 +45,7 @@ namespace SportArete.Core.Services
         {
             return await repo.AllReadonly<Product>()
                 .OrderByDescending(h => h.ViewsCount)
+                .Where(h => h.IsAvailable == true)
                 .Select(h => new ProductViewModel()
                 {
                     Id = h.Id,
@@ -101,6 +102,7 @@ namespace SportArete.Core.Services
             return await repo.AllReadonly<Product>()
                 .OrderByDescending(h => h.ViewsCount)
                 .Where(p => p.BrandId == brandId)
+                .Where(h => h.IsAvailable == true)
                 .Select(h => new ProductViewModel()
                 {
                     Id = h.Id,
@@ -120,6 +122,7 @@ namespace SportArete.Core.Services
             return await repo.AllReadonly<Product>()
                 .OrderByDescending(h => h.ViewsCount)
                 .Where(p => p.CategoryId == categoryId)
+                .Where(h => h.IsAvailable == true)
                 .Select(h => new ProductViewModel()
                 {
                     Id = h.Id,
