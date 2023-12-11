@@ -19,6 +19,10 @@ namespace SportArete.Infrastructure.Data.Models
         public string Name { get; set; } = null!;
 
         [Required]
+        [Description("Link to the logo of the brand.")]
+        public string LogoImageData { get; set; }
+
+        [Required]
         [StringLength(DescriptionMaxLength)]
         [Description("Description of the brand.")]
         public string Description { get; set; } = null!;
