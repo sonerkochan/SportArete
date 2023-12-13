@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using SportArete.Core.Contracts;
 using SportArete.Core.Data;
@@ -40,9 +41,28 @@ namespace SportArete.Controllers
         /// <returns>All available products</returns>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(string sortOrder)
         {
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
+
             var model = await productService.GetAllAsync();
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    model = model.OrderByDescending(m => m.Model);
+                    break;
+                case "Price":
+                    model = model.OrderBy(m => m.Price);
+                    break;
+                case "price_desc":
+                    model = model.OrderByDescending(m => m.Price);
+                    break;
+                default:
+                    model = model.OrderBy(m => m.Model);
+                    break;
+            }
 
             return View(model);
         }

@@ -7,8 +7,21 @@
 
 <p class="topProducts" style="top: 43px;">ALL PRODUCTS</p>
 
+
 <div class="d-flex justify-content-center">
-    @foreach (var product in Model.OrderBy(x => x.Model))
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Clothing name", "All", new { sortOrder = ViewBag.NameSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Product Price", "All", new { sortOrder = ViewBag.PriceSortParm })
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var product in Model)
     {
         <div class="container page-wrapper">
             <div class="page-inner">
@@ -18,7 +31,7 @@
                             <img class="img" src="@product.ImageData" alt="Product Image">
                             <div class="img-info">
                                 <div class="info-inner">
-                                    <span class="p-name">@product.Brand @product.Model</span>
+                                        <span class="p-name">@product.Model (@product.Brand) </span>
                                 </div>
                                 @if (product.Category == "Clothing")
                                 {
