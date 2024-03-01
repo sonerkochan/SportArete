@@ -2,6 +2,8 @@
 
 **SportArete** - final project for [**ASP.NET Advanced**](https://softuni.bg/trainings/3854/asp-net-advanced-october-2022) course at [SoftUni](https://softuni.bg/ "SoftUni") (October 2022).
 
+Demo: https://sportarete.azurewebsites.net/
+
 ## :pencil: Overview
 
 **SportArete** is a e-commerce website.
