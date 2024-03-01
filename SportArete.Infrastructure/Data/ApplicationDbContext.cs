@@ -22,6 +22,22 @@ namespace SportArete.Core.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
+
+            builder.Entity<Order>()
+                .Property(o => o.TotalPrice)
+                .HasColumnType("decimal(18,2)");
+
+
+            builder.Entity<OrderProduct>()
+                .Property(op => op.Price)
+                .HasColumnType("decimal(18,2)");
+
+
+            builder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
+
             builder.Entity<CartProduct>()
                 .HasKey(x => new { x.CartId, x.ProductId });
             builder.Entity<OrderProduct>()
