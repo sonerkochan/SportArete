@@ -65,9 +65,9 @@
 
             <div class="reviewBox">
                 <div class="container1StarRating">
-                    <h2StarRating>Star Reviews</h2StarRating>
+                    <h2StarRating>Reviews</h2StarRating>
                     <div class="descriptionStarRating">
-                        <p>Star review section. Check out the reviews below.</p>
+                        <p>Check out the reviews below.</p>
                     </div>
 
                     @if (Model.Reviews.Count() != 0)
@@ -116,7 +116,7 @@
                     }
 
                     <a asp-area="" asp-controller="Product" asp-action="AddReview" asp-route-id="@Model.Id">
-                        <button class="button1">Review the product</button>
+                        <button class="button1">Leave a review</button>
                     </a>
                 </div>
             </div>
